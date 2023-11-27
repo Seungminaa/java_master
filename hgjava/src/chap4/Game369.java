@@ -146,7 +146,7 @@ public class Game369 {
 			}else if(N1 < N){
 				System.out.println("up하세요!");
 			}
-		}
+		} //추가 되었습니다.
 		
 	}
 
