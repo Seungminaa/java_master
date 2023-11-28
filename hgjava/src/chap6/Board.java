@@ -8,9 +8,6 @@ public class Board {
 	private String content;
 	private String btime;
 	
-	Board() {
-		
-	}
 	
 	Board(int bnum,String title,String name,String content,String btime){
 		this.bnum=bnum;
@@ -49,6 +46,15 @@ public class Board {
 	public void setBtime(String btime) {
 		this.btime = btime;
 	}
-	
+	void showInfo() {
+		System.out.println("번호 : " + bnum);
+		System.out.println("제목 : " + title);
+	}
+	void showDetail() {
+		System.out.println("제목 : " + title);
+		System.out.println("작성자 : " + name);
+		System.out.println("내용 : " + content);
+		System.out.println("작성일시 : " + btime);
+	}
 	
 }
