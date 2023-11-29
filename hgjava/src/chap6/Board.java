@@ -1,5 +1,8 @@
 package chap6;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Board {
 
 	private int bnum;
@@ -11,6 +14,21 @@ public class Board {
 	//변경되었습니다.
 
 	//나도 변경해야지
+	
+	Board(int bnum,String title,String name,String content){
+		Date today = new Date(); //시스템 시간을 기준으로 생성
+//		int year = today.getYear();
+//		int month = today.getMonth()+1;
+//		int date = today.getDate();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		this.bnum=bnum;
+		this.title=title;
+		this.content=content;
+		this.name=name;
+		this.btime = sdf.format(today);
+	}
 
 	Board(int bnum,String title,String name,String content,String btime){
 		this.bnum=bnum;
