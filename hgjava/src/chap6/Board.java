@@ -8,6 +8,7 @@ public class Board {
 	private String content;
 	private String btime;
 	
+	//변경되었습니다.
 	
 	Board(int bnum,String title,String name,String content,String btime){
 		this.bnum=bnum;
