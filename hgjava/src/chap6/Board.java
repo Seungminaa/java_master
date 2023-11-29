@@ -8,7 +8,7 @@ public class Board {
 	private String content;
 	private String btime;
 	
-	
+	//나도 변경해야지
 	Board(int bnum,String title,String name,String content,String btime){
 		this.bnum=bnum;
 		this.title=title;
