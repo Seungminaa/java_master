@@ -3,6 +3,7 @@ package chap6;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class Board {
 
 	private int bnum;
@@ -14,8 +15,11 @@ public class Board {
 	//변경되었습니다.
 
 	//나도 변경해야지
+	public Board() {
+		
+	}
 	
-	Board(int bnum,String title,String name,String content){
+	public Board(int bnum,String title,String name,String content){
 		Date today = new Date(); //시스템 시간을 기준으로 생성
 //		int year = today.getYear();
 //		int month = today.getMonth()+1;
@@ -30,11 +34,9 @@ public class Board {
 		this.btime = sdf.format(today);
 	}
 
-	Board(int bnum,String title,String name,String content,String btime){
-		this.bnum=bnum;
-		this.title=title;
-		this.content=content;
-		this.name=name;
+	public Board(int bnum,String title,String name,String content,String btime){
+		// this(); //기본생성자
+		this(bnum,title,name,content);
 		this.btime=btime;
 	}
 	public int getBnum() {
@@ -67,11 +69,11 @@ public class Board {
 	public void setBtime(String btime) {
 		this.btime = btime;
 	}
-	void showInfo() {
+	public void showInfo() {
 		System.out.println("번호 : " + bnum);
 		System.out.println("제목 : " + title);
 	}
-	void showDetail() {
+	public void showDetail() {
 		System.out.println("제목 : " + title);
 		System.out.println("작성자 : " + name);
 		System.out.println("내용 : " + content);

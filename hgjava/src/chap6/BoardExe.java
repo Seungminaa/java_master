@@ -5,14 +5,17 @@ import java.util.Date;
 
 //저장소: boards
 public class BoardExe {
-	Board[] boards;
+	static Board[] boards;
 	
 	BoardExe() {
+		//boards = new Board[100];
+	}
+	{
 		boards = new Board[100];
 	}
 	
 	//등록 글번호/제목/작성자/내용/작업일시 => 반환값 : boolean
-	boolean addBoard(Board board) {
+	public static boolean addBoard(Board board) {
 		for(int i=0;i<boards.length;i++) {
 			if(boards[i] == null) {
 				boards[i] = board;
@@ -24,7 +27,7 @@ public class BoardExe {
 	}
 	
 	//목록 반환값: 배열
-	Board[] boardList() {
+	public static Board[] boardList() {
 		// boards => 새로운 배열에 정렬된 값으로 변환
 		Board temp =null;
 			for (int i = 0; i < boards.length-1; i++) {
@@ -43,7 +46,7 @@ public class BoardExe {
 	} //end boardList()
 	
 	//배열, 페이지 => 페이지의 5건을 반환
-	Board[] pageList(Board[] ary,int page) { //배열, 배열 갯수
+	public static Board[] pageList(Board[] ary,int page) { //배열, 배열 갯수
 		Board[] resultAry = new Board[5];
 		int start = (page -1) * 5;
 		int end =page * 5;
@@ -58,7 +61,7 @@ public class BoardExe {
 	}
 	
 	//단건조회 매개변수: 글번호, 반환값: Board
-	Board getBoard(int no) {
+	public static Board getBoard(int no) {
 		for(int i=0;i<boards.length;i++) {
 			if(boards[i] != null && boards[i].getBnum() == no) {
 				return boards[i];
@@ -68,7 +71,7 @@ public class BoardExe {
 	}
 	
 	//신규번호 : 현재글번호+1
-	int getSequence() {
+	public static int getSequence() {
 		int seqNo = 1;
 		// 배열에서 글번호의 max가져오기
 		int max = 0;
@@ -82,7 +85,7 @@ public class BoardExe {
 	}
 	
 	//초기값 생성
-	void initData() {
+	public static void initData() {
 		boards[0] = new Board(1,"첫번째 글", "user01","첫번째","2023-11-28");
 		boards[1] = new Board(2,"두번째 글", "user02","두번째","2023-11-28");
 		boards[2] = new Board(3,"세번째 글", "user03","세번째","2023-11-28");
@@ -95,7 +98,7 @@ public class BoardExe {
 	}
 	
 	//수정 제목/내용/일시 수정 매개값(글번호, 내용) => boolean
-	boolean modBoard(int no, String content) {
+	public static boolean modBoard(int no, String content) {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		for(int i=0;i<boards.length;i++) {
@@ -109,7 +112,7 @@ public class BoardExe {
 	}
 	
 	//삭제 매개값(글번호) => boolean
-	boolean remBoard(int no) {
+	public static boolean remBoard(int no) {
 		for(int i=0;i<boards.length;i++) {
 			if(boards[i] != null && no == boards[i].getBnum()) {
 				boards[i] = null;
@@ -121,7 +124,7 @@ public class BoardExe {
 	}
 	
 	//사용자가 해당글번호의 수정,삭제권한 체크 => boolean
-	boolean checkResponsibility(String id, int no) {
+	public static boolean checkResponsibility(String id, int no) {
 		for(int i=0;i<boards.length;i++) {
 			if(boards[i] != null && boards[i].getBnum() == no && boards[i].getName().equals(id)) {
 				return true;
@@ -133,7 +136,7 @@ public class BoardExe {
 	}
 	
 	//게시글을 담고 있는 배열에서 값이 있는 건수를 반환
-	int getBoardCount() {
+	public static int getBoardCount() {
 		int realCnt = 0;
 		for(int i=0;i<boards.length;i++) {
 			if(boards[i] != null) {
