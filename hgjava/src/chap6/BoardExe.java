@@ -5,14 +5,12 @@ import java.util.Date;
 
 //저장소: boards
 public class BoardExe {
-	static Board[] boards;
+	static Board[] boards = new Board[100];
 	
 	BoardExe() {
 		//boards = new Board[100];
 	}
-	{
-		boards = new Board[100];
-	}
+
 	
 	//등록 글번호/제목/작성자/내용/작업일시 => 반환값 : boolean
 	public static boolean addBoard(Board board) {
@@ -86,9 +84,9 @@ public class BoardExe {
 	
 	//초기값 생성
 	public static void initData() {
-		boards[0] = new Board(1,"첫번째 글", "user01","첫번째","2023-11-28");
-		boards[1] = new Board(2,"두번째 글", "user02","두번째","2023-11-28");
-		boards[2] = new Board(3,"세번째 글", "user03","세번째","2023-11-28");
+		boards[0] = new Board(1,"첫번째 글", "user01","첫번째");
+		boards[1] = new Board(2,"두번째 글", "user02","두번째");
+		boards[2] = new Board(3,"세번째 글", "user03","세번째");
 		boards[3] = new Board(4,"네번째 글", "user04","네번째");
 		boards[4] = new Board(5,"다섯번째 글", "user05","다섯번째");
 		boards[5] = new Board(6,"여섯번째 글", "user06","여섯번째");
