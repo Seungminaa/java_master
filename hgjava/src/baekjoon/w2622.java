@@ -9,21 +9,20 @@ public class w2622 {
 		
 		int a = Integer.parseInt(br.readLine());
 		
+		int cnt = 0;
 		int b = a/3;
 		for(int i=1;i<=b;i++) {
-			for(int j=1;j<=a;i++) {
-				if(2 *sam(i,j,a-i-j) < a) {
-					
+			for(int j=i;j<=(a-i)/2;j++) {
+				int c=a-i-j;
+				if(j>c) {
+					break;
+				}
+				if(c<i+j) {
+					cnt++;
 				}
 			}
 		}
+		System.out.println(cnt);
 	}
-	static int sam(int a1,int a2, int a3) {
-		int[] as = new int[3];
-		as[0] = a1;
-		as[1] = a2;
-		as[2] = a3;
-		Arrays.sort(as);
-		return as[2]; //max
-	}
+
 }
