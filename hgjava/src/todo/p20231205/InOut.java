@@ -29,8 +29,6 @@ public class InOut {
 		this.date2=sdf.format(date);
 	}
 	void stock() {
-		System.out.println("상품코드 \t 가격");
-		System.out.println("===========================");
 		System.out.println(this.prodCode + "\t" + this.prodNum);
 	}
 }

@@ -97,6 +97,8 @@ public class ProdApp {
 					break;
 				
 				case 3:
+					System.out.println("상품코드 \t 가격");
+					System.out.println("===========================");
 					for(InOut b : exe1.prodSum()) {
 						b.stock();
 					}
