@@ -1,4 +1,4 @@
-package miniPrj;
+package com.yedam;
 
 import lombok.Data;
 

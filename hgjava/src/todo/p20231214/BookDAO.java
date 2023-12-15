@@ -27,7 +27,7 @@ public class BookDAO {
 	}
 
 
-	boolean addBook(Book std) { // 추가
+	boolean addBook(Book std) { // 아이디생성
 		getConn();
 		String sql = "insert into book values(?,?,?,?,?)";
 		try {
@@ -46,7 +46,6 @@ public class BookDAO {
 			e.printStackTrace();
 		}
 		return false;
-		
 	}
 
 	ArrayList<Book> listBook() { // 조회
