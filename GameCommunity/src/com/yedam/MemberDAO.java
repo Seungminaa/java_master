@@ -15,6 +15,7 @@ public class MemberDAO {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url, "dev", "dev"); // url,아디,비번
+			System.out.println("접속됨");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

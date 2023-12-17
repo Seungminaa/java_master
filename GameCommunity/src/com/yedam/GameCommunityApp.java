@@ -121,7 +121,11 @@ public class GameCommunityApp {
 							break;
 							
 						case 2:
-							
+							System.out.print("등록할 글제목 > ");
+							String bTitle = sc.nextLine();
+							System.out.print("글내용(최대 500자까지 가능) > ");
+							String bContent = sc.nextLine();
+							bdao.boardAdd(bTitle,bContent);
 							break;
 							
 						case 3:

@@ -9,9 +9,10 @@ public class BoardDAO {
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	private MemberDAO mdao = new MemberDAO();
+	private ArrayList<Integer> bNumCounts = new ArrayList<Integer>();
 	
 	
-	ArrayList<Board> boardList() {
+	ArrayList<Board> boardList() { //글 리스트 보기
 		conn = mdao.getConn();
 		ArrayList<Board> boards = new ArrayList<Board>();
 		String sql = "select * from board order by 1";
@@ -34,5 +35,22 @@ public class BoardDAO {
 		return boards;
 		
 	}
+
+
+	boolean boardAdd(String bTitle,String bContent) {
+		
+		
+		
+		return false;
+	}
+	
+	ArrayList<Integer> bNumCount(){
+		int count = 0;
+		if(true) {
+			
+		}
+		return bNumCounts;
+	}
+	
 
 }
