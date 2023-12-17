@@ -38,17 +38,14 @@ public class BoardDAO {
 
 
 	boolean boardAdd(String bTitle,String bContent) {
-		
+		conn = mdao.getConn();
 		
 		
 		return false;
 	}
 	
 	ArrayList<Integer> bNumCount(){
-		int count = 0;
-		if(true) {
-			
-		}
+		
 		return bNumCounts;
 	}
 	
