@@ -10,6 +10,7 @@ public class StudentApp {
 		Scanner sc = new Scanner(System.in);
 		boolean run = true;
 		StudentExe exe = new StudentExe();
+		StudentDAO dao = new StudentDAO();
 		
 		while(run) {
 			System.out.println("1.등록 || 2.목록 || 3.단건조회 || 4.수정 || 5.삭제 || 6.종료");
@@ -29,7 +30,7 @@ public class StudentApp {
 				
 				Student std = new Student(name, no, eng, math);
 				
-				if(exe.addStudent(std)) {
+				if(dao.addStudent(std)) {
 					System.out.println("저장되었습니다");
 				}else {
 					System.out.println("저장 불가");
@@ -50,7 +51,8 @@ public class StudentApp {
 //						students[i].showInfo();
 //					}
 //				}
-				for(Student st : exe.getStudentList()) {
+				Student[] stdAry = dao.getStudentList();
+				for(Student st : stdAry) {
 					if(st != null) {
 						st.showInfo();
 					}
@@ -66,7 +68,7 @@ public class StudentApp {
 //						students[i].showInfo();
 //					}
 //				}
-				Student stnd = exe.getStudent(no);
+				Student stnd = dao.getStudent(no);
 				if(stnd != null) {
 					stnd.showInfo();
 				}else {
@@ -91,7 +93,7 @@ public class StudentApp {
 				System.out.print("영어점수 > ");
 				eng = Integer.parseInt(sc.nextLine());
 				
-				if(exe.modify(no, eng, math)) {
+				if(dao.modify(no, eng, math)) {
 					System.out.println("수정완료");
 				}else {
 					System.out.println("수정실패");
@@ -99,14 +101,14 @@ public class StudentApp {
 				break;
 				
 			case 5:
-				System.out.print("삭제할 학생번호 > ");
-				no = sc.nextLine();
+				System.out.print("삭제할 학생이름 > ");
+				name = sc.nextLine();
 //				for(int i=0;i<students.length;i++) {
 //					if(students[i] != null && students[i].getStudNo().equals(no)) {
 //						students[i] = null;
 //					}
 //				}
-				if(exe.remove(no)) {
+				if(dao.remove(name)) {
 					System.out.println("삭제완료");
 				}else {
 					System.out.println("삭제실패");

@@ -9,9 +9,7 @@ public class Product {
 	private int price;
 	
 	Product() {
-		this.prodCode=prodCode;
-		this.prodName=prodName;
-		this.price=price;
+		
 	}
 	Product(String prodCode, String prodName, int price){
 		this.prodCode=prodCode;

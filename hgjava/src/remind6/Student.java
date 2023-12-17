@@ -1,10 +1,13 @@
 package remind6;
 
 public class Student {
-	String studNo;
-	String name;
+	String studNo; //stud_no
+	String name; // 
 	int eng;
 	int math;
+	Student(){
+		
+	}
 	void showInfo() {
 		System.out.println("학생이름 : " + name);
 		System.out.println("학생번호 : " + studNo);
