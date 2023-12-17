@@ -9,12 +9,12 @@ public class BoardDAO {
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	private MemberDAO mdao = new MemberDAO();
-	private ArrayList<Integer> bNumCounts = new ArrayList<Integer>();
+	private ArrayList<Board> boards;
 	
 	
 	ArrayList<Board> boardList() { //글 리스트 보기
 		conn = mdao.getConn();
-		ArrayList<Board> boards = new ArrayList<Board>();
+		boards = new ArrayList<Board>();
 		String sql = "select * from board order by 1";
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -25,7 +25,7 @@ public class BoardDAO {
 				board.setBName(rs.getString("b_name"));
 				board.setBTitle(rs.getString("b_title"));
 				board.setBContent(rs.getString("b_content"));
-				board.setBDate(rs.getDate("b_date"));
+				board.setBDate(rs.getString("b_date"));
 				// 배열의 빈곳에 한건 저장
 				boards.add(board);
 			}
@@ -37,17 +37,104 @@ public class BoardDAO {
 	}
 
 
-	boolean boardAdd(String bTitle,String bContent) {
+	boolean boardAdd(String id,String bTitle,String bContent) { //글 등록
 		conn = mdao.getConn();
-		
+		int count=0;
+		String sql = "select count(*) as count from board";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1)+1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		sql = "insert into board values(?,?,?,?,?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			Board board = new Board(bTitle,bContent);
+			psmt.setInt(1, count);
+			psmt.setString(2, id);
+			psmt.setString(3, bTitle);
+			psmt.setString(4, bContent);
+			psmt.setString(5, board.getBDate());
+			
+			int r = psmt.executeUpdate();
+			if(r==1) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return false;
 	}
-	
-	ArrayList<Integer> bNumCount(){
-		
-		return bNumCounts;
+
+
+	boolean boardMod(String id,int boardDetail, String bTitle, String bContent) { //글 수정
+		conn = mdao.getConn();
+		String sql = "update board set b_title=?,b_content=? where b_num=? and b_name=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, bTitle);
+			psmt.setString(2, bContent);
+			psmt.setInt(3, boardDetail);
+			psmt.setString(4, id);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+//			e.printStackTrace();
+		}
+		return false;
 	}
+
+
+	Board bDetailView(int boardDetail) {
+		conn = mdao.getConn();
+		String sql = "select * from board where b_num=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardDetail);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				Board board = new Board();
+				board.setBNum(rs.getInt("b_num"));
+				board.setBName(rs.getString("b_name"));
+				board.setBTitle(rs.getString("b_title"));
+				board.setBContent(rs.getString("b_content"));
+				board.setBDate(rs.getString("b_date"));
+				return board;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	boolean boardDel(String id, int boardDetail) {
+		conn = mdao.getConn();
+		String sql = "delete from board where b_num=? and b_name=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardDetail);
+			psmt.setString(2, id);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+//			e.printStackTrace();
+		}
+		return false;
+	}
+	
+
 	
 
 }

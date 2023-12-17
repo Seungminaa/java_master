@@ -2,11 +2,11 @@ package com.yedam;
 
 import java.util.*;
 
-
 public class GameCommunityApp {
 	static MemberDAO mdao = new MemberDAO();
 	static BoardDAO bdao = new BoardDAO();
 	static Scanner sc = new Scanner(System.in);
+	static String id;
 
 	public static void main(String[] args) {
 		while (true) {
@@ -14,14 +14,14 @@ public class GameCommunityApp {
 			boolean adminVu = false;
 			boolean run = true;
 
-			while (logrun) { //로그인 while
+			while (logrun) { // 로그인 while
 				System.out.println("1.로그인 2.계정생성 3.계정삭제");
 				System.out.print("입력 > ");
 				int logmenu = Integer.parseInt(sc.nextLine());
 				switch (logmenu) {
 				case 1:
 					System.out.print("id를 입력 > ");
-					String id = sc.nextLine();
+					id = sc.nextLine();
 					System.out.print("pw를 입력 > ");
 					String pw = sc.nextLine();
 					if (mdao.login(id, pw)) {
@@ -68,7 +68,7 @@ public class GameCommunityApp {
 					int adMenu = Integer.parseInt(sc.nextLine());
 					switch (adMenu) {
 					case 1:
-						
+
 						break;
 
 					case 2:
@@ -88,66 +88,108 @@ public class GameCommunityApp {
 					int cosMenu = Integer.parseInt(sc.nextLine());
 					switch (cosMenu) {
 					case 1:
-						
+
 						break;
 
 					case 2:
-						
-						boolean bRun = true;
-						
-						System.out.println("1.목록 및 게시글보기 2.글등록 3.글수정 4.글삭제 5.취소");
-						System.out.print("입력 > ");
-						int boardMenu = Integer.parseInt(sc.nextLine());
-						switch (boardMenu) {
-						case 1:
-							System.out.println("================목차===============");
-							for(Board b : bdao.boardList()) {
-								b.showInfo();
-							}
-							System.out.println("=================================");
-							System.out.println("0.처음으로 가기 | n.글 상세보기");
-							System.out.print("입력 > ");
-							int boarddetail = Integer.parseInt(sc.nextLine());
-							switch (boarddetail) {
-							case 0:
-								continue;
 
-							default:
-								int a = boarddetail;
+						boolean bRun = true;
+						while (bRun) {
+							System.out.println("1.목록 및 게시글보기 2.글등록 3.게시판 나가기");
+							System.out.print("입력 > ");
+							int boardMenu = Integer.parseInt(sc.nextLine());
+							switch (boardMenu) {
+							case 1: //글 목록
+								System.out.println("==============글목록===============");
+								System.out.println("글번호\t글쓴이\t글제목");
+								for (Board b : bdao.boardList()) {
+									b.showInfo();
+								}
+								System.out.println("================================");
+								System.out.println("0.뒤로 가기 | n.글 상세보기");
+								System.out.print("입력 > ");
+								int boardDetail = Integer.parseInt(sc.nextLine());
+								switch (boardDetail) {
+								case 0:
+									break;
+
+								default:
+									(bdao.bDetailView(boardDetail)).showDetail();
+									System.out.println("1.글 수정 | 2.글 삭제 | 3. 게시판으로 가기");
+									System.out.print("입력 > ");
+									int boardUD = Integer.parseInt(sc.nextLine());
+									switch (boardUD) {
+									case 1: //글 수정
+										System.out.print("수정할 글제목 > ");
+										String bTitle = sc.nextLine();
+										System.out.print("수정할 글내용(최대 500자까지 가능) > ");
+										String bContent = sc.nextLine();
+										if (bdao.boardMod(id,boardDetail, bTitle, bContent)) {
+											System.out.println("글이 수정되었습니다.");
+										} else {
+											System.out.println("글 수정 권한이 없습니다.");
+										}
+										break;
+										
+									case 2:
+										if (bdao.boardDel(id,boardDetail)) {
+											System.out.println("글이 삭제되었습니다.");
+										} else {
+											System.out.println("글 삭제 권한이 없습니다.");
+										}
+										break;
+										
+									case 3:
+										continue;
+									}
+									break;
+								}
+
+								break;
+
+							case 2: //글 등록
+								System.out.print("등록할 글제목 > ");
+								String bTitle = sc.nextLine();
+								System.out.print("글내용(최대 500자까지 가능) > ");
+								String bContent = sc.nextLine();
+								if (bdao.boardAdd(id, bTitle, bContent)) {
+									System.out.println("글이 등록되었습니다.");
+								} else {
+									System.out.println("글 등록에 실패하였습니다.");
+								}
+								break;
+
+							case 3:
+								bRun = false;
 								break;
 							}
-						
-							
-							break;
-							
-						case 2:
-							System.out.print("등록할 글제목 > ");
-							String bTitle = sc.nextLine();
-							System.out.print("글내용(최대 500자까지 가능) > ");
-							String bContent = sc.nextLine();
-							bdao.boardAdd(bTitle,bContent);
-							break;
-							
-						case 3:
-							
-							break;
-							
-						case 4:
-							
-							break;
-							
-						case 5:
-							
-							break;
-
-						}
-						
-						
-						break;
-
+						}//게시판 while
+						continue;
 					case 3:
-
-						break;
+						System.out.println("1.잔여포인트 확인 2.포인트 양도");
+						System.out.print("입력 > ");
+						int pointMenu = Integer.parseInt(sc.nextLine());
+						switch (pointMenu) {
+						case 1: //잔여포인트 확인
+							mdao.pointCheck(id);
+							break;
+						
+						case 2: //포인트 양도
+							System.out.print("포인트 양도해줄 아이디 > ");
+							String ids = sc.nextLine();
+							System.out.print("양도해줄 포인트양 > ");
+							int assignNum = Integer.parseInt(sc.nextLine());
+							if(mdao.pointAssign(id,ids,assignNum)) {
+								System.out.println(id +"에서 " + ids + "로 " + assignNum+"만큼 포인트를 양도했습니다");
+							}else {
+								System.out.println("포인트가 부족하거나 양도해줄 아이디가 맞지 않습니다.");
+							}
+							break;
+							
+						default:
+							System.out.println("존재하지 않는 선택지입니다.");
+							break;
+						}
 
 					case 4:
 
@@ -161,7 +203,7 @@ public class GameCommunityApp {
 				}
 
 			}
-			
-		}//큰 while
+
+		} // 큰 while
 	}
 }

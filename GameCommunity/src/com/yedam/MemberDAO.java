@@ -15,7 +15,6 @@ public class MemberDAO {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url, "dev", "dev"); // url,아디,비번
-			System.out.println("접속됨");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,7 +31,7 @@ public class MemberDAO {
 			psmt.setString(2, pw);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
-					return true;
+				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,4 +80,64 @@ public class MemberDAO {
 		}
 		return false;
 	}
+
+	void pointCheck(String id) {
+		getConn();
+		String sql = "select point from member where id=?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				System.out.println("현재 잔여포인트는 "+rs.getInt("point") + "점 입니다.");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	boolean pointAssign(String id,String ids,int assignNum) {
+		getConn();
+		String sql = "select point from member where id=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			if(rs.next() && rs.getInt("point") > assignNum) {
+				sql = "update member set point=(?+(select point from member where id=?)) where id=?";
+				try {
+					psmt = conn.prepareStatement(sql);
+					psmt.setInt(1, assignNum);
+					psmt.setString(2, ids);
+					psmt.setString(3, ids);
+					rs = psmt.executeQuery();
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				sql = "update member set point=((select point from member where id=?)-?) where id=?";
+				try {
+					psmt = conn.prepareStatement(sql);
+					psmt.setString(1, id);
+					psmt.setInt(2, assignNum);
+					psmt.setString(3, id);
+					rs = psmt.executeQuery();
+					if(rs.next()) {
+						return true;
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else {
+				return false;
+			}
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 }
