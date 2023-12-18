@@ -21,6 +21,23 @@ public class MemberDAO {
 		return conn;
 	}
 	
+	void disConn() {
+		try {
+			if(conn != null) {
+				conn.close();
+			}
+			if(rs != null) {
+				rs.close();
+			}
+			if(psmt != null) {
+				psmt.close();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	boolean login(String id, String pw) { // 로그인
 		getConn();
 		
@@ -35,6 +52,8 @@ public class MemberDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			disConn();
 		}
 		return false;
 	}
@@ -54,6 +73,8 @@ public class MemberDAO {
 			}
 		} catch (Exception e) {
 			System.out.println("중복된 아이디입니다.");
+		}finally {
+			disConn();
 		}
 		return false;
 	}
@@ -77,6 +98,8 @@ public class MemberDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			disConn();
 		}
 		return false;
 	}
@@ -94,6 +117,8 @@ public class MemberDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			disConn();
 		}
 	}
 
@@ -135,6 +160,8 @@ public class MemberDAO {
 		
 		}catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			disConn();
 		}
 		return false;
 	}

@@ -5,6 +5,7 @@ import java.util.*;
 public class GameCommunityApp {
 	static MemberDAO mdao = new MemberDAO();
 	static BoardDAO bdao = new BoardDAO();
+	static ProductDAO pdao = new ProductDAO();
 	static Scanner sc = new Scanner(System.in);
 	static String id;
 
@@ -192,7 +193,22 @@ public class GameCommunityApp {
 						}
 
 					case 4:
-
+						System.out.println("===============================");
+						System.out.println("상품코드 \t상품명 \t가격 \t상품재고량");
+						for (ProductAdmin b : pdao.prodList()) {
+							b.showprod();
+						}
+						System.out.println("===============================");
+						System.out.print("구매할 상품번호를 입력해주세요(뒤로가려면 0을 눌러주세요) > ");
+						int buyNum = Integer.parseInt(sc.nextLine());
+						switch (buyNum) {
+						case 0:
+							break;
+							
+						default:
+							
+							break;
+						}
 						break;
 
 					case 5:

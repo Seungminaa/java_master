@@ -10,6 +10,7 @@ public class BoardDAO {
 	private ResultSet rs;
 	private MemberDAO mdao = new MemberDAO();
 	private ArrayList<Board> boards;
+	private int count;
 	
 	
 	ArrayList<Board> boardList() { //글 리스트 보기
@@ -31,6 +32,8 @@ public class BoardDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			mdao.disConn();
 		}
 		return boards;
 		
@@ -39,8 +42,7 @@ public class BoardDAO {
 
 	boolean boardAdd(String id,String bTitle,String bContent) { //글 등록
 		conn = mdao.getConn();
-		int count=0;
-		String sql = "select count(*) as count from board";
+		String sql = "select nvl(MAX(b_num),1) as count from board";
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
@@ -66,6 +68,8 @@ public class BoardDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			mdao.disConn();
 		}
 		
 		return false;
@@ -88,6 +92,8 @@ public class BoardDAO {
 		} catch (Exception e) {
 			return false;
 //			e.printStackTrace();
+		}finally {
+			mdao.disConn();
 		}
 		return false;
 	}
@@ -111,6 +117,8 @@ public class BoardDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			mdao.disConn();
 		}
 		return null;
 	}
@@ -130,6 +138,8 @@ public class BoardDAO {
 		} catch (Exception e) {
 			return false;
 //			e.printStackTrace();
+		}finally {
+			mdao.disConn();
 		}
 		return false;
 	}

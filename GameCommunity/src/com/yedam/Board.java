@@ -43,5 +43,8 @@ public class Board extends Member{
 		System.out.println("-----------------------------------------------------");
 		System.out.println("글 내용 | " + this.bContent);
 		System.out.println("-----------------------------------------------------");
+		System.out.println("글 작성일 | " + this.bDate);
+		System.out.println("-----------------------------------------------------");
+		
 	}
 }
