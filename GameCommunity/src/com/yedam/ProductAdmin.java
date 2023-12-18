@@ -15,4 +15,5 @@ public class ProductAdmin {
 	void showprod() {
 		System.out.println(this.prodCode+"\t"+this.prodName+"\t"+this.prodPrice +"\t"+this.prodCount);
 	}
+	
 }

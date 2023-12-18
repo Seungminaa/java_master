@@ -87,10 +87,9 @@ public class MemberDAO {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
-			rs = psmt.executeQuery();
 			
 			int r = psmt.executeUpdate();
-			if(r >0 && pw.equals(rs.getString("passwd"))) {
+			if(r >0 ) {
 				return true;
 			}else {
 				System.out.println("삭제할 아이디,패스워드를 확인해주세요");

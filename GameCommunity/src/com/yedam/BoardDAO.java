@@ -144,6 +144,24 @@ public class BoardDAO {
 		return false;
 	}
 	
+	boolean boardDelAdmin(int boardDetail) {
+		conn = mdao.getConn();
+		String sql = "delete from board where b_num=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardDetail);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+//			e.printStackTrace();
+		}finally {
+			mdao.disConn();
+		}
+		return false;
+	}
 
 	
 

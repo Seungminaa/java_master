@@ -11,8 +11,14 @@ public class Product {
 	private int prodOQ; //주문수량
 	private String prodDate; //상품도착날짜,주문 날짜로부터 3일후
 	
-	public Product() {
+	Product() {
 		
 	}
-	
+	Product(int prodCodes,String prodnames,String prodId,String prodAddr,int prodOQ) {
+		this.prodCodes=prodCodes;
+		this.prodnames=prodnames;
+		this.prodId=prodId;
+		this.prodAddr=prodAddr;
+		this.prodOQ=prodOQ;
+	}
 }
