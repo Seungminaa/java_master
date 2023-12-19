@@ -180,6 +180,25 @@ public class MemberDAO {
 				}
 		return false;
 	}
+	
+	void getPoint1(String id, int money) {
+		getConn();
+		String sql = "update member set point=(?+(select point from member where id=?)) where id=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, (money*2));
+			psmt.setString(2, id);
+			psmt.setString(3, id);
+			rs = psmt.executeQuery();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
 
 	void getPoint2(String id, int gamePoint, long totalTime) {
 
@@ -243,5 +262,7 @@ public class MemberDAO {
 		
 		return members;
 	}
+
+	
 
 }
