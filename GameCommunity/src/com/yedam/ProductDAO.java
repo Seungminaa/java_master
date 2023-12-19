@@ -7,6 +7,7 @@ import java.sql.Date;
 public class ProductDAO {
 	private Connection conn;
 	private PreparedStatement psmt;
+	private PreparedStatement psmt2;
 	private ResultSet rs;
 	private MemberDAO mdao = new MemberDAO();
 	private ArrayList<Product> prods;
@@ -40,7 +41,8 @@ public class ProductDAO {
 		conn = mdao.getConn();
 		int qo = 0;
 		int pCode =0;
-		String sql = "select p_price,p_code from product_admin where p_code=?";
+		int pCount = 0;
+		String sql = "select p_price,p_code,p_count from product_admin where p_code=?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, buyNum);
@@ -49,6 +51,7 @@ public class ProductDAO {
 			if (rs.next()) {
 				qo = rs.getInt("p_price");
 				pCode = rs.getInt("p_code");
+				pCount = rs.getInt("p_count");
 			}
 		} catch (Exception e) {
 			System.out.println("상품목록에 없는 상품입니다.");
@@ -56,6 +59,10 @@ public class ProductDAO {
 		}
 		if(pCode!=buyNum) {
 			System.out.println("상품목록에 없는 상품입니다.");
+			return false;
+		}
+		if((pCount-prodOQ) < 0) {
+			System.out.println("재고가 부족합니다.");
 			return false;
 		}
 		sql = "select point from member where id=?";
@@ -85,7 +92,7 @@ public class ProductDAO {
 		conn = mdao.getConn();
 		String pName = "";
 		int pPrice = 0;
-		String sql = "select p_name,p_price from product_admin where p_code=?";
+		String sql = "select p_name,p_price,p_count from product_admin where p_code=?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, buyNum);
@@ -98,25 +105,31 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		sql = "insert into product(p_code,p_id,p_names,p_addr,p_oq) values(?,?,?,?,?)";
-
+		String sql2 = "update product_admin set p_count=((select p_count from product_admin where p_code =?)-?) where p_code=?";
 		try {
 			psmt = conn.prepareStatement(sql);
+			psmt2 = conn.prepareStatement(sql2);
 			psmt.setInt(1, buyNum);
 			psmt.setString(2, id);
 			psmt.setString(3, pName);
 			psmt.setString(4, prodAddr);
 			psmt.setInt(5, prodOQ);
+			psmt2.setInt(1, buyNum);
+			psmt2.setInt(2, prodOQ);
+			psmt2.setInt(3, buyNum);
 
 			int r = psmt.executeUpdate();
-			if (r == 1) {
+			int r2 = psmt2.executeUpdate();
+			if (r == 1 && r2 == 1) {
 				sql = "update member set point=((select point from member where id=?)-?) where id=?";
 				try {
 					psmt = conn.prepareStatement(sql);
 					psmt.setString(1, id);
 					psmt.setInt(2, (pPrice * prodOQ));
 					psmt.setString(3, id);
+				
 					r = psmt.executeUpdate();
-					if (r == 1) {
+					if (r == 1 ) {
 						System.out.println("주문이 접수되었습니다.");
 					}
 
@@ -125,7 +138,7 @@ public class ProductDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("상품목록에 없는 상품입니다.");
+			System.out.println("상품목록에 없거나 매진된 상품입니다.");
 		}finally {
 			mdao.disConn();
 		}
@@ -231,7 +244,7 @@ public class ProductDAO {
 			}
 		} catch (Exception e) {
 			return false;
-		}finally {
+		} finally {
 			mdao.disConn();
 		}
 		return false;

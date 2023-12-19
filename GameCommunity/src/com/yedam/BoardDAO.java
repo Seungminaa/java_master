@@ -42,25 +42,25 @@ public class BoardDAO {
 
 	boolean boardAdd(String id,String bTitle,String bContent) { //글 등록
 		conn = mdao.getConn();
-		String sql = "select nvl(MAX(b_num),1) as count from board";
-		try {
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			if(rs.next()) {
-				count = rs.getInt(1)+1;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		sql = "insert into board values(?,?,?,?,?)";
+//		String sql = "select nvl(MAX(b_num),1) as count from board";
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			rs = psmt.executeQuery();
+//			if(rs.next()) {
+//				count = rs.getInt(1)+1;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		String sql = "insert into board values(b_num_seq.nextval,?,?,?,?)";
 		try {
 			psmt = conn.prepareStatement(sql);
 			Board board = new Board(bTitle,bContent);
-			psmt.setInt(1, count);
-			psmt.setString(2, id);
-			psmt.setString(3, bTitle);
-			psmt.setString(4, bContent);
-			psmt.setString(5, board.getBDate());
+//			psmt.setInt(1, count);
+			psmt.setString(1, id);
+			psmt.setString(2, bTitle);
+			psmt.setString(3, bContent);
+			psmt.setString(4, board.getBDate());
 			
 			int r = psmt.executeUpdate();
 			if(r==1) {

@@ -16,4 +16,12 @@ public class Member {
 		this.id=id;
 		this.passwd=pw;
 	}
+	Member(String id,int point) {
+		this.id=id;
+		this.point=point;
+	}
+
+	void showPoint() {
+		System.out.println(this.id + "\t" + this.point);
+	}
 }
