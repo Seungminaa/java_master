@@ -18,7 +18,12 @@ public class GameCommunityApp {
 			while (logrun) { // 로그인 while
 				System.out.println("1.로그인 2.계정생성 3.계정삭제");
 				System.out.print("입력 > ");
-				int logmenu = Integer.parseInt(sc.nextLine());
+				int logmenu;
+				try {
+				logmenu = Integer.parseInt(sc.nextLine());
+				}catch (Exception e) {
+					continue;
+				}
 				switch (logmenu) {
 				case 1:
 					System.out.print("id를 입력 > ");
@@ -66,14 +71,24 @@ public class GameCommunityApp {
 				while (run) {
 					System.out.println("1.게시판 2.물품관리 3.포인트 4.로그아웃");
 					System.out.print("입력 > ");
-					int adMenu = Integer.parseInt(sc.nextLine());
+					int adMenu;
+					try {
+						adMenu = Integer.parseInt(sc.nextLine());
+						}catch (Exception e) {
+							continue;
+						}
 					switch (adMenu) {
 					case 1: // 게시판
 						boolean bRun = true;
 						while (bRun) {
 							System.out.println("1.목록 및 게시글보기 2.글등록 3.게시판 나가기");
 							System.out.print("입력 > ");
-							int boardMenu = Integer.parseInt(sc.nextLine());
+							int boardMenu;
+							try {
+								boardMenu = Integer.parseInt(sc.nextLine());
+								}catch (Exception e) {
+									continue;
+								}
 							switch (boardMenu) {
 							case 1: // 글 목록
 								System.out.println("==============글목록===============");
@@ -139,12 +154,17 @@ public class GameCommunityApp {
 						while (pRun) { // 물품
 							System.out.println("1.물품목록보기 2.물품등록 3.물품수정 4.물품삭제 5.뒤로가기");
 							System.out.print("입력 > ");
-							int prodMenu = Integer.parseInt(sc.nextLine());
+							int prodMenu;
+							try {
+								prodMenu = Integer.parseInt(sc.nextLine());
+								}catch (Exception e) {
+									continue;
+								}
 							switch (prodMenu) {
 							case 1: // 물품목록
 								System.out.println("==============물품목록===============");
 								System.out.println("물품코드\t물품명\t물품가격\t물품수량");
-								for (ProductAdmin b : pdao.prodListAdmin()) {
+								for (ProductAdmin b : pdao.prodList()) {
 									b.showprod();
 								}
 								System.out.println("================================");
@@ -200,7 +220,12 @@ public class GameCommunityApp {
 						while (pointRun) { // 포인트
 							System.out.println("1.포인트 주기 2.포인트 보유현황 3.뒤로가기");
 							System.out.print("입력 > ");
-							int pointMenu = Integer.parseInt(sc.nextLine());
+							int pointMenu;
+							try {
+								pointMenu = Integer.parseInt(sc.nextLine());
+								}catch (Exception e) {
+									continue;
+								}
 							switch (pointMenu) {
 							case 1: // 포인트 주기
 								System.out.print("포인트 줄 아이디 > ");
@@ -213,11 +238,11 @@ public class GameCommunityApp {
 									System.out.println("포인트가 부족하거나 양도해줄 아이디가 맞지 않습니다.");
 								}
 								break;
-							
-							case 2: //포인트 보유현황
+
+							case 2: // 포인트 보유현황
 								System.out.println("아이디\t 포인트");
 								System.out.println("========================");
-								for(Member m : mdao.pointList()) {
+								for (Member m : mdao.pointList()) {
 									m.showPoint();
 								}
 								System.out.println("========================");
@@ -237,11 +262,16 @@ public class GameCommunityApp {
 
 					}
 				}
-			} else { // 사용자 목록
+			} else { // 일반 사용자 목록
 				while (run) {
 					System.out.println("1.게임 2.게시판 3.포인트 4.물품구매 5.구매목록 6.로그아웃");
 					System.out.print("입력 > ");
-					int cosMenu = Integer.parseInt(sc.nextLine());
+					int cosMenu;
+					try {
+						cosMenu = Integer.parseInt(sc.nextLine());
+						}catch (Exception e) {
+							continue;
+						}
 					switch (cosMenu) {
 					case 1: // 게임
 						boolean gRun = true;
@@ -251,102 +281,148 @@ public class GameCommunityApp {
 							int gameMenu = Integer.parseInt(sc.nextLine());
 							// 게임에서 승리시 point 오르게끔(id기준)
 							switch (gameMenu) {
-							case 1: //도둑잡기 게임
-								
-								//카드설정
+							case 1: // 도둑잡기 게임
+
+								// 카드설정
 								int[] deck = new int[27];
-								for(int i=0;i<13;i++) {
-									deck[i] = i+1;
+								for (int i = 0; i < 13; i++) {
+									deck[i] = i + 1;
 								}
-								for(int i=13;i<26;i++) {
-									deck[i] = i-12;
+								for (int i = 13; i < 26; i++) {
+									deck[i] = i - 12;
 								}
-								deck[26]=99; //조커
-								for(int i=0;i<deck.length;i++) {
-									int j = (int)(Math.random() * 27);
+								deck[26] = 99; // 조커
+								for (int i = 0; i < deck.length; i++) {
+									int j = (int) (Math.random() * 27);
 									int temp = deck[i];
 									deck[i] = deck[j];
 									deck[j] = temp;
 								}
 								List<Integer> userCard = new LinkedList<>();
 								List<Integer> dealerCard = new LinkedList<>();
-								
+
 								System.out.println("도둑잡기 게임은 포인트 배팅시스템입니다. \n승리시 배팅금액의 2배를 가져가게 됩니다.");
 								System.out.println("단, 배팅금액이 너무 적을시 포인트가 증가되지 않을수 있습니다.");
-								System.out.println("도둑은 0번입니다.");
+								System.out.println("도둑은 99번입니다.");
+								System.out.println("--------------------------------");
 								System.out.print("배팅할 포인트 > ");
 								int money = Integer.parseInt(sc.nextLine());
+								if(money > pdao.pricePoint(id)) {
+									System.out.println("보유 포인트가 부족합니다.");
+									break;
+								}
 								System.out.println("--------------------------------");
-						        for (int i = 0; i < 13; i++) {
-						        	userCard.add(deck[i]);
-						        	dealerCard.add(deck[i+13]);
-						        }
-						        userCard.add(deck[26]);
-						        System.out.println(userCard);
-						        System.out.println(dealerCard);
-						        //카드주고 받기
-						        while(true) {
-						        	Set<Integer> set = new HashSet<Integer>(userCard);
-						        	Set<Integer> set2 = new HashSet<Integer>(dealerCard);
-						        	int[] strs = new int[userCard.size()]; //중복된 값
-						        	int count =0;
-						        	
-						        	for (int str : set) {
-						        		if(Collections.frequency(userCard, str) > 1) {
-						        			strs[count] = str;
-						        			count++;
-						        		}
-						        	}
-						        	
-						        	for(int i=0;i<userCard.size();i++) {
-						        		for(int j=0;j<count;j++) {
-						        			if(userCard.get(i)==strs[j]) {
-						        				userCard.remove(i);
-						        			}
-						        		}
-						        	}
-						        	System.out.println("현재 보유 카드 : " + userCard);
-						        	System.out.print("보낼카드를 선택하세요.");
-						        	int send = Integer.parseInt(sc.nextLine())-1;
-						        	
-						        	dealerCard.add(userCard.get(send));
-						        	userCard.remove(send);
-						        	if(userCard.size()==0) {
-						        		System.out.println("승리하셨습니다.");
-						        		mdao.getPoint1(id, money);
-						        		break;
-						        	}
-						        	int[] str2 = new int[dealerCard.size()];
-						        	count=0;
-						        	for (int str : set2) {
-						        		if(Collections.frequency(dealerCard, str2) > 1) {
-						        			str2[count] = str;
-						        			count++;
-						        		}
-						        	}
-						        	//삭제시 배열이 당겨지면서 애러가남
-						        	for(int i=0;i<dealerCard.size();i++) {
-						        		for(int j=0;j<count;j++) {
-						        			if(dealerCard.get(i)==str2[j]) {
-						        				dealerCard.remove(i);
-						        			}
-						        		}
-						        	}
-						        	System.out.println("딜러 현재 보유 카드 : " + userCard);
-						        	if(dealerCard.size()==0) {
-						        		System.out.println("패배하셨습니다.");
-						        		break;
-						        	}
-						        	send = (int)(Math.random() * dealerCard.size());
-						        	userCard.add(dealerCard.get(send));
-						        	dealerCard.remove(send);
-						        	if(dealerCard.size()==0) {
-						        		System.out.println("패배하셨습니다.");
-						        		break;
-						        	}
-						        }
-						        
-								
+								for (int i = 0; i < 13; i++) {
+									userCard.add(deck[i]);
+									dealerCard.add(deck[i + 13]);
+								}
+								userCard.add(deck[26]);
+								// 카드주고 받기
+								while (true) {
+
+									Set<Integer> set = new HashSet<Integer>(userCard);
+									Set<Integer> set2 = new HashSet<Integer>(dealerCard);
+									int[] strs = new int[userCard.size()]; // 자신카드 중복체크
+									int count = 0;
+
+									for (int str : set) { //
+										if (Collections.frequency(userCard, str) > 1) {
+											strs[count] = str;
+											count++;
+										}
+									}
+
+									for (int j = 0; j < count; j++) {
+										for (int i = 0; i < userCard.size(); i++) {
+											if (userCard.get(i) == strs[j]) {
+												userCard.remove(i);
+												i--;
+											}
+										}
+									}
+
+									int[] str2 = new int[dealerCard.size()]; // 상대카드 중복체크
+									count = 0;
+									for (int str : set2) {
+										if (Collections.frequency(dealerCard, str) > 1) {
+											str2[count] = str;
+											count++;
+										}
+									}
+
+									for (int j = 0; j < count; j++) {
+										for (int i = 0; i < dealerCard.size(); i++) {
+											if (dealerCard.get(i) == str2[j]) {
+												dealerCard.remove(i);
+												i--;
+											}
+										}
+									}
+									if (dealerCard.size() == 0) {
+										System.out.println("패배하셨습니다.");
+										mdao.getPoint1_1(id, money);
+										break;
+									}
+									
+									if (userCard.size() == 0) {
+										System.out.println("승리하셨습니다.");
+										mdao.getPoint1(id, money);
+										break;
+									}
+									System.out.println("현재 보유 카드 : " + userCard);
+									System.out.println("딜러의 보유카드수 : " + dealerCard.size());
+									System.out.print("딜러의 카드수 중에서 받을 카드를 선택하세요.");
+									System.out.print("입력 > ");
+									int rec;
+									while(true) {
+										rec = Integer.parseInt(sc.nextLine()) - 1;
+										if(rec<dealerCard.size()) {
+											break;
+										}else {
+											System.out.println("숫자가 맞지 않습니다. 다시 입력해주세요.");
+											System.out.print("입력 > ");
+										}
+									}
+
+									userCard.add(dealerCard.get(rec));
+									dealerCard.remove(rec);
+									
+									strs = new int[userCard.size()]; // 자신카드 중복체크
+									count = 0;
+
+									for (int str : set) { //
+										if (Collections.frequency(userCard, str) > 1) {
+											strs[count] = str;
+											count++;
+										}
+									}
+
+									for (int j = 0; j < count; j++) {
+										for (int i = 0; i < userCard.size(); i++) {
+											if (userCard.get(i) == strs[j]) {
+												userCard.remove(i);
+												i--;
+											}
+										}
+									}
+									
+									if (userCard.size() == 0) {
+										System.out.println("승리하셨습니다.");
+										mdao.getPoint1(id, money);
+										break;
+									}
+
+									if (dealerCard.size() == 0) {
+										System.out.println("패배하셨습니다.");
+										mdao.getPoint1_1(id, money);
+										break;
+									}
+									rec = (int) (Math.random() * userCard.size());
+									dealerCard.add(userCard.get(rec));
+									userCard.remove(rec);
+									
+								}
+
 								break;
 							case 2: // 숫자 추측 게임
 								System.out.println("주어진 숫자는 1~1000 단위 숫자입니다.");
@@ -470,7 +546,7 @@ public class GameCommunityApp {
 						while (bRun) {
 							System.out.println("1.목록 및 게시글보기 2.글등록 3.게시판 나가기");
 							System.out.print("입력 > ");
-							int boardMenu = Integer.parseInt(sc.nextLine());
+							int boardMenu= Integer.parseInt(sc.nextLine());
 							switch (boardMenu) {
 							case 1: // 글 목록
 								System.out.println("==============글목록===============");

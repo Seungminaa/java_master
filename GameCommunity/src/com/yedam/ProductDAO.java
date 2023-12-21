@@ -12,6 +12,8 @@ public class ProductDAO {
 	private MemberDAO mdao = new MemberDAO();
 	private ArrayList<Product> prods;
 	private ArrayList<ProductAdmin> prodAdmins;
+	
+
 
 	ArrayList<ProductAdmin> prodList() { // 상품구매 리스트
 		conn = mdao.getConn();
@@ -35,6 +37,25 @@ public class ProductDAO {
 			mdao.disConn();
 		}
 		return prodAdmins;
+	}
+	
+	int pricePoint(String id) { // 보유포인트 확인
+		conn = mdao.getConn();
+		int point =0;
+		String sql = "select point from member where id=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				point = rs.getInt("point");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			mdao.disConn();
+		}
+		return point;
 	}
 
 	boolean prodBuy(int prodOQ, String id, int buyNum) { // 구매수량 체크
@@ -145,7 +166,7 @@ public class ProductDAO {
 
 	}
 
-	void prodBuyList(String id) {
+	void prodBuyList(String id) { //구매리스트 출력
 		conn = mdao.getConn();
 		String sql = "select to_date(p.p_date,'yy/mm/dd')as dates,sysdate from product p,product_admin a where p.p_code = a.p_code and p.p_id=?";
 		try {
@@ -188,7 +209,7 @@ public class ProductDAO {
 		System.out.println("========================================================");
 	}
 
-	boolean prodAdd(String pName,int pPrice,int pCount) {
+	boolean prodAdd(String pName,int pPrice,int pCount) { //관리자 상품추가
 		conn = mdao.getConn();
 		String sql = "insert into product_admin values(p_num_seq.NEXTVAL,?,?,?)";
 		try {
@@ -208,7 +229,7 @@ public class ProductDAO {
 		return false;
 	}
 
-	boolean prodDel(int seq) {
+	boolean prodDel(int seq) { //관리자 상품삭제
 		conn = mdao.getConn();
 		String sql = "delete from product_admin where p_code=?";
 		try {
@@ -229,7 +250,7 @@ public class ProductDAO {
 		return false;
 	}
 
-	boolean prodMod(int seq, String pName, int pPrice, int pCount) {
+	boolean prodMod(int seq, String pName, int pPrice, int pCount) { //관리자 상품수정
 		conn = mdao.getConn();
 		String sql = "update product_admin set p_name=?,p_price=?,p_count=? where p_code=?";
 		try {
@@ -249,28 +270,5 @@ public class ProductDAO {
 		}
 		return false;
 	}
-	ArrayList<ProductAdmin> prodListAdmin() { //글 리스트 보기
-		conn = mdao.getConn();
-		prodAdmins = new ArrayList<ProductAdmin>();
-		String sql = "select * from product_admin order by 1";
-		try {
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				ProductAdmin prods = new ProductAdmin();
-				prods.setProdCode(rs.getInt("p_code"));
-				prods.setProdName(rs.getString("p_name"));
-				prods.setProdPrice(rs.getInt("p_price"));
-				prods.setProdCount(rs.getInt("p_count"));
-				// 배열의 빈곳에 한건 저장
-				prodAdmins.add(prods);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			mdao.disConn();
-		}
-		return prodAdmins;
-		
-	}
+
 }

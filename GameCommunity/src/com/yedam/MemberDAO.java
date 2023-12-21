@@ -11,6 +11,7 @@ public class MemberDAO {
 
 	Connection getConn() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 연결될 url
+//		String url = "jdbc:oracle:thin:@192.168.0.38:1521:xe"; // 연결될 url
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url, "dev", "dev"); // url,아디,비번
@@ -188,6 +189,20 @@ public class MemberDAO {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, (money*2));
 			psmt.setString(2, id);
+			psmt.setString(3, id);
+			rs = psmt.executeQuery();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	void getPoint1_1(String id, int money) {
+		getConn();
+		String sql = "update member set point=((select point from member where id=?)-?) where id=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setInt(2, money);
 			psmt.setString(3, id);
 			rs = psmt.executeQuery();
 
