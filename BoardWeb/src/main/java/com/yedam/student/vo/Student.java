@@ -1,6 +1,7 @@
-package common;
+package com.yedam.student.vo;
 
 public class Student {
+	//db 컬럼명과 이름 맞춰야함
 	String studNo; //stud_no
 	String name; // 
 	int eng;

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- id는 구현했던 메소드와 동일하게 작성, resultType은 반환되는 값의 위치=값 -->
+<mapper namespace="com.yedam.board.mapper.BoardMapper">
+  <select id="selectList" resultType="board">
+    select * from board order by 1
+  </select>
+  <select id="selectOne" resultType="board" parameterType="int">
+  	select * from board where board_no=#{bno}
+  </select>
+  <insert id="insertBoard" parameterType="board">
+  	insert into board (board_no,title, writer, content)
+	values(board_seq.nextval,#{title}, #{writer},#{content})
+  </insert>
+  <update id="updateBoard" parameterType="board">
+  	update board set content=#{contnent} where board_no=#{boardNo}
+  </update>
+  <delete id="delelteBoard" parameterType="int">
+  	delete from board where board_no = #{bno}
+  </delete>
+  <update id="updateCnt" parameterType="int">
+  	update board set click_cnt = click_cnt + 1 where board_no=#{bno}
+  </update>
+</mapper>
