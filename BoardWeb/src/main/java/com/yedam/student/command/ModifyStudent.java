@@ -1,4 +1,4 @@
-package common;
+package com.yedam.student.command;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.yedam.student.service.StudentService;
+import com.yedam.student.serviceImpl.StudentServiceImpl;
+import com.yedam.student.vo.Student;
 
 @WebServlet("/modifyStudent")
 public class ModifyStudent extends HttpServlet {
@@ -21,7 +25,7 @@ public class ModifyStudent extends HttpServlet {
 		//파라미터 활용해서 조회
 		String sno = request.getParameter("sno");
 		
-		StudentDAO dao = new StudentDAO();
+		StudentService dao = new StudentServiceImpl();
 		Student std = dao.getStudent(sno);
 		
 		String str ="<form action='updateStudent'>";
