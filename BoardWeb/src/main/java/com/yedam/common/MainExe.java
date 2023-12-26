@@ -7,28 +7,30 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.yedam.board.mapper.BoardMapper;
 import com.yedam.board.vo.BoardVO;
+import com.yedam.member.mapper.MemberMapper;
+import com.yedam.member.service.MemberService;
+import com.yedam.member.serviceImpl.MemberServiceImpl;
+import com.yedam.member.vo.MemberVO;
 
 public class MainExe {
 	public static void main(String[] args) {
 		SqlSessionFactory factory = DataSource.getInstance();
 		SqlSession session = factory.openSession(true);
 		
-		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		
 //		List<BoardVO> list = mapper.selectList();
 //		for(BoardVO vo : list) {
 //			System.out.println(vo.toString());
 //		}
-		BoardVO vo = new BoardVO();
-		vo.setTitle("tttttt");
-		vo.setContent("cdcdcdcd");
-		vo.setWriter("wwwwwwww");
-		vo.setBoardNo(4);
+		MemberService svc = new MemberServiceImpl();
 		
-		if(mapper.updateBoard(vo)==1) {
-			System.out.println("수정완료");
+		MemberVO vo = svc.login("user1", "1111"); 
+		
+		if(vo != null) {
+			System.out.println(vo);
 		}else {
-			System.out.println("수정실패");
+			System.out.println("실패");
 		}
 	}
 }
