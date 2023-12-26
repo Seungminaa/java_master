@@ -37,3 +37,4 @@
 		</tbody>
 	</table>
 </form>
+<%@ include file="../layout/foot.jsp" %>

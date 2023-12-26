@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>addBoardForm.jsp</title>
-</head>
-<body>
+<%@ include file="../layout/menu.jsp" %>
+<%@ include file="../layout/nav.jsp" %>
 	<h3>등록화면</h3>
 	<form action="addBoard.do">
-		<table border='1'>
+		<table class="table">
 			<tr>
 				<th>제목</th>
 				<td><input type="text" name="title"></td>
@@ -20,7 +15,11 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
+<<<<<<< HEAD
 				<td><input type="text" name="writer" value="<%=vo.get %>"></td>
+=======
+				<td><input type="text" name="writer" value="<%=logName %>"></td>
+>>>>>>> branch 'master' of https://github.com/Seungminaa/java_master.git
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -30,5 +29,4 @@
 			</tr>
 		</table>
 	</form>
-</body>
-</html>
+<%@ include file="../layout/foot.jsp" %>
