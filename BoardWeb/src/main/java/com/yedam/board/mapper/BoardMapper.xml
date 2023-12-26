@@ -15,7 +15,7 @@
 	values(board_seq.nextval,#{title}, #{writer},#{content})
   </insert>
   <update id="updateBoard" parameterType="board">
-  	update board set content=#{contnent} where board_no=#{boardNo}
+  	update board set content=#{content} where board_no=#{boardNo}
   </update>
   <delete id="delelteBoard" parameterType="int">
   	delete from board where board_no = #{bno}
