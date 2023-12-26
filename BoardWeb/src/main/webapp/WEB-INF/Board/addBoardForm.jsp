@@ -4,7 +4,7 @@
 <%@ include file="../layout/nav.jsp" %>
 	<h3>등록화면</h3>
 	<form action="addBoard.do">
-		<table border='1'>
+		<table class="table">
 			<tr>
 				<th>제목</th>
 				<td><input type="text" name="title"></td>
