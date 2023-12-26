@@ -2,6 +2,7 @@ package com.yedam.member.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.yedam.common.Control;
 import com.yedam.member.service.MemberService;
@@ -20,6 +21,14 @@ public class LoginControl implements Control {
 		MemberService svc = new MemberServiceImpl();
 		
 		MemberVO vo = svc.login(id, pw);
+		
+		if(vo != null) {
+			//세션객체 로그인 정보 저장
+			HttpSession session = req.getSession();
+			session.setAttribute("logid", vo.getId());
+			session.setAttribute("logName", vo.getName());
+			//세션객체에 로그인 아이디값 저장
+		}
 		
 		try {
 		if(vo != null) {

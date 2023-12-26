@@ -20,7 +20,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" value="홍길동"></td>
+				<td><input type="text" name="writer" value="<%=vo.get %>"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
