@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>addBoardForm.jsp</title>
-</head>
-<body>
+<%@ include file="../layout/menu.jsp" %>
+<%@ include file="../layout/nav.jsp" %>
 	<h3>등록화면</h3>
 	<form action="addBoard.do">
 		<table border='1'>
@@ -20,7 +15,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" value="홍길동"></td>
+				<td><input type="text" name="writer" value="<%=logName %>"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -30,5 +25,4 @@
 			</tr>
 		</table>
 	</form>
-</body>
-</html>
+<%@ include file="../layout/foot.jsp" %>
