@@ -1,4 +1,4 @@
-package com.yedam.member.command;
+package com.yedam.student.command;
 
 import java.io.IOException;
 
@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
 
-public class LoginFormControl implements Control {
+public class studentListCont implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			req.getRequestDispatcher("member/logForm.tiles").forward(req, resp);
+			//tiles.xml -> WILDCARD:student/* -> student/{1}.jsp -> {1} = studentList
+			req.getRequestDispatcher("student/studentList.tiles").forward(req, resp);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

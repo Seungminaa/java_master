@@ -4,8 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<jsp:include page="../layout/menu.jsp"/>
-<jsp:include page="../layout/nav.jsp"/>
+
 
 <!-- EL(Expression Language) -->
 <h3>게시판</h3>

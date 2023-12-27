@@ -34,7 +34,7 @@ public class StudentDAO {
 			while(rs.next()) {
 				Student student = new Student();
 				student.setStudNo(rs.getString("stud_no"));
-				student.setName(rs.getString("stud_name"));
+				student.setName(rs.getString("name"));
 				student.setEng(rs.getInt("eng"));
 				student.setMath(rs.getInt("math"));
 				
@@ -77,7 +77,7 @@ public class StudentDAO {
 				if(rs.next()) {
 					Student student = new Student();
 					student.setStudNo(rs.getString("stud_no"));
-					student.setName(rs.getString("stud_name"));
+					student.setName(rs.getString("name"));
 					student.setEng(rs.getInt("eng"));
 					student.setMath(rs.getInt("math"));
 					return student;
@@ -112,7 +112,7 @@ public class StudentDAO {
 	//삭제
 	public boolean remove(String name) {	
 			getConn();
-			String sql = "delete from student where stud_name=?";
+			String sql = "delete from student where name=?";
 			try {
 				psmt = conn.prepareStatement(sql);
 				psmt.setString(1, name);
