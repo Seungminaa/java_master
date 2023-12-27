@@ -12,17 +12,7 @@ public class LogoutControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-<<<<<<< HEAD
-		//로그아웃.. 세션삭제 - invalidate()
-		HttpSession session = req.getSession();
-		session.invalidate();
 		
-		try {
-			resp.sendRedirect("loginForm.do");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-=======
 		// 로그아웃, 세선삭제.
 		// invalidate() -> 저장된 세션정보 전체를 삭제
 		// removeAttribute(String name) -> name에 저장된 세션정보만 삭제
@@ -34,7 +24,6 @@ public class LogoutControl implements Control {
 			e.printStackTrace();
 		}
 
->>>>>>> branch 'master' of https://github.com/Seungminaa/java_master.git
 	}
 
 }

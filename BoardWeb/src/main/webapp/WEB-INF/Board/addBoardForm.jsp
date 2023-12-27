@@ -15,11 +15,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-<<<<<<< HEAD
-				<td><input type="text" name="writer" value="<%=vo.get %>"></td>
-=======
 				<td><input type="text" name="writer" value="<%=logName %>"></td>
->>>>>>> branch 'master' of https://github.com/Seungminaa/java_master.git
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

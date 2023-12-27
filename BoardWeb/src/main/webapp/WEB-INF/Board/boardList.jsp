@@ -2,8 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../layout/menu.jsp"%>
-<%@ include file="../layout/nav.jsp"%>
+<%@ include file= "../layout/menu.jsp"%>
+<%@ include file= "../layout/nav.jsp"%>
 <%
 List<BoardVO> list = (List<BoardVO>) request.getAttribute("boardList");
 %>

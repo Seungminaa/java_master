@@ -25,19 +25,7 @@ public class LoginControl implements Control {
 		
 		MemberVO vo = svc.login(id, pw);
 		
-<<<<<<< HEAD
-		if(vo != null) {
-			//세션객체 로그인 정보 저장
-			HttpSession session = req.getSession();
-			session.setAttribute("logid", vo.getId());
-			session.setAttribute("logName", vo.getName());
-			//세션객체에 로그인 아이디값 저장
-		}
-		
-		try {
-=======
-		
->>>>>>> branch 'master' of https://github.com/Seungminaa/java_master.git
+
 		if(vo != null) {
 			// 세션 객체 로그인 정보 저장.
 				HttpSession session = req.getSession();
@@ -57,5 +45,5 @@ public class LoginControl implements Control {
 				e.printStackTrace();
 			}
 		}
-	}
+}
 }
