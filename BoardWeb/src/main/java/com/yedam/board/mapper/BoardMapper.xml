@@ -11,8 +11,8 @@
   	select * from board where board_no=#{bno}
   </select>
   <insert id="insertBoard" parameterType="board">
-  	insert into board (board_no,title, writer, content)
-	values(board_seq.nextval,#{title}, #{writer},#{content})
+  	INSERT INTO board(board_no, title, writer, content, image)
+	VALUES (board_seq.NEXTVAL, #{title}, #{writer}, #{content},#{image})
   </insert>
   <update id="updateBoard" parameterType="board">
   	update board set content=#{content} where board_no=#{boardNo}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,33 +15,38 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-    <%
-    	String logId = (String) session.getAttribute("logId");
-    	String logName = (String) session.getAttribute("logName");
-    %>
         <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-            <% if (logName == null) {%>
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap(Guest)</div>
-                <% } else { %>
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap(<%=logName %>)</div>
-                <% } %>
-                
+            	<c:choose>
+            	<c:when test="${empty logName }">
+            	<div class="sidebar-heading border-bottom bg-light">Bootstrap(Guest)</div>
+            	</c:when>
+            	<c:otherwise>
+            	<div class="sidebar-heading border-bottom bg-light">Bootstrap(${logName })</div>
+            	</c:otherwise>
+            	</c:choose>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">글목록</a>
-                <% if (logId == null) { %>
+                    
+					<c:choose>
+					<c:when test="${empty logId }">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인</a>
-                    <% } else { %>
+                    </c:when>
+                    <c:otherwise>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="logout.do">로그아웃</a>
-                    <% } %>
-                    <% if (logName == null) { %>
+					</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+            		<c:when test="${empty logName }">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">글등록</a>
-                    <% } else { %>
+                    </c:when>
+            		<c:otherwise>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">글등록</a>
-                    <% } %>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                    </c:otherwise>
+            		</c:choose>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>
             </div>
