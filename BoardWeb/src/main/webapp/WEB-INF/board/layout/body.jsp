@@ -10,5 +10,4 @@
                         <code>#sidebarToggle</code>
                         ID which will toggle the menu when clicked.
                     </p>
-                
             

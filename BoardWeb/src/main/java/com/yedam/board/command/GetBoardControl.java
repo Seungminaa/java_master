@@ -24,7 +24,7 @@ public class GetBoardControl implements Control {
 		req.setAttribute("vo", vo);
 		
 		//페이지 이동(forward)
-				RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/Board/getBoard.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("board/getBoard.tiles");
 				try {
 					rd.forward(req, resp);
 				} catch (ServletException | IOException e) {

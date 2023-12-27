@@ -3,8 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-<jsp:include page="../layout/menu.jsp"/>
-<jsp:include page="../layout/nav.jsp"/>
 	
     <form name="myForm" action="removeBoard.do">
     <input type="hidden" name="bno" value="${vo.boardNo}">
@@ -47,4 +45,3 @@
     </form>
     <br>
     <a href="boardList.do">글목록으로</a>
-<%@ include file="../layout/foot.jsp" %>

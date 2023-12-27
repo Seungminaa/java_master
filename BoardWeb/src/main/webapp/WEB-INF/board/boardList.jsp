@@ -30,4 +30,3 @@
 		</c:forEach>
 	</tbody>
 </table>
-<jsp:include page="../layout/foot.jsp"/>

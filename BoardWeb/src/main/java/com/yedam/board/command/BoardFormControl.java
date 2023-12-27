@@ -17,7 +17,7 @@ public class BoardFormControl implements Control {
 		
 		
 		//페이지 이동(forward)
-				RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/Board/addBoardForm.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("board/addBoardForm.tiles");
 				try {
 					rd.forward(req, resp);
 				} catch (ServletException | IOException e) {
