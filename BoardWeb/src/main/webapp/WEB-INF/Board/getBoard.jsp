@@ -35,7 +35,11 @@
 	            </tr>
 	            <tr>
 	                <th>이미지</th>
-	                <td colspan="3">${vo.image}</td>
+	                <td colspan="3">
+	                <c:if test="${!empty vo.image }">
+	                <img width="150px" src="images/${vo.image }">
+	                </c:if>
+	                </td>
 	            </tr>
 	            <tr>
 	                <td colspan="4" align="center">
