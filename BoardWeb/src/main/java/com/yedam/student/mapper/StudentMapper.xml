@@ -2,16 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+<!-- id는 구현했던 메소드와 동일하게 작성, resultType은 반환되는 값의 위치=값 -->
 <mapper namespace="com.yedam.student.mapper.StudentMapper">
-	<select id="studentList" resultType="student">
-		SELECT * FROM student ORDER BY 1
-	</select>
-	<insert id="addStudent" parameterType="student">
-		INSERT INTO student VALUES(#{studentNumber}, #{studentName}, #{englishScore}, #{mathematicsScore})
-	</insert>
-	<delete id="remStudent" parameterType="String">
-		DELETE student WHERE student_number = #{sno}
-	</delete>
-	
+  <select id="studentList" resultType="student">
+    select * from student order by 1 desc
+  </select>
+  <insert id="addStudent" parameterType="student">
+  	insert into student values(#{studNo},#{name},#{eng},#{math})
+  </insert>
+  <delete id="remStudent" parameterType="string">
+  	delete from student where stud_no = #{sno}
+  </delete>
 </mapper>

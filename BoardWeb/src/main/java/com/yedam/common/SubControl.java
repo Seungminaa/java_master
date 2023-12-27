@@ -11,12 +11,14 @@ public class SubControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println("서브컨트롤");
+		
 		String bno = req.getParameter("bno");
 		
 		BoardService svc = new BoardServiceMybatis();
 		BoardVO vo = svc.getBoard(Integer.parseInt(bno));
+		
 		System.out.println(vo.toString());
-	
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.yedam.board.command;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,31 +15,28 @@ public class AddBoardControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		// parameter(title, content, writer) => insert, 목록페이지.
+		// param(3개), db insert,목록페이지
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String writer = req.getParameter("writer");
-		
+		BoardService svc = new BoardServiceMybatis();
 		BoardVO vo = new BoardVO();
 		vo.setTitle(title);
-		vo.setContent(content);
-		vo.setWriter(writer);
-		BoardService svc = new BoardServiceMybatis();
+		vo.setTitle(content);
+		vo.setTitle(writer);
 		
-		// svc의 addBoard() 활용		
 		if(svc.addBoard(vo)) {
-			// 등록 성공시 목록페이지로 이동
 			try {
-				// sendRedirect : 페이지 지정가능(외부 페이지 가능)
 				resp.sendRedirect("boardList.do");
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-			// 등록 실패시 등록페이지로 이동
+		}else {
 			try {
 				resp.sendRedirect("boardForm.do");
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

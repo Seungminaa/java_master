@@ -6,7 +6,7 @@ import com.yedam.student.mapper.StudentDAO;
 import com.yedam.student.service.StudentService;
 import com.yedam.student.vo.Student;
 
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService{
 
 	StudentDAO dao = new StudentDAO();
 	
@@ -22,12 +22,12 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public boolean modStudent(String sno, int escore, int mscore) {
-		return dao.modifyStudent(sno, escore, mscore);
+		return dao.modify(sno, escore, mscore);
 	}
 
 	@Override
 	public boolean remStudent(String sno) {
-		return dao.removeStudent(sno);
+		return dao.remove(sno);
 	}
 
 	@Override
@@ -35,4 +35,6 @@ public class StudentServiceImpl implements StudentService {
 		return dao.getStudent(sno);
 	}
 
+	
+	
 }

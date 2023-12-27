@@ -12,10 +12,10 @@ public class LoginFormControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		// 화면 호출.
 		try {
-			req.getRequestDispatcher("WEB-INF/member/loginForm.jsp").forward(req, resp);
+			req.getRequestDispatcher("WEB-INF/member/logForm.jsp").forward(req, resp);
 		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

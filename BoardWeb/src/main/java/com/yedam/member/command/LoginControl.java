@@ -16,35 +16,34 @@ public class LoginControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		// id, pw	=> 정상		=> 목록으로 이동
-		//			=> 비정상	=> 로그인 화면 
+		//id, pw -> 정상 -> 목록
+		//       -> 비정상 -> 로그인화면
 		
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
-		
 		MemberService svc = new MemberServiceImpl();
 		
 		MemberVO vo = svc.login(id, pw);
 		
+		
 		if(vo != null) {
 			// 세션 객체 로그인 정보 저장.
-			HttpSession session = req.getSession();
-			session.setAttribute("logId", vo.getId());	// 세션 객체에 로그인 아이디 값 저장
-			session.setAttribute("logName", vo.getName());
-			
-			try {
-				resp.sendRedirect("boardList.do");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
+				HttpSession session = req.getSession();
+				session.setAttribute("logId", vo.getId());	// 세션 객체에 로그인 아이디 값 저장
+				session.setAttribute("logName", vo.getName());
+		
+		try {
+			resp.sendRedirect("boardList.do");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+		}else {
 			req.setAttribute("message", "아이디와 비밀번호를 확인하세요");
 			try {
-				req.getRequestDispatcher("WEB-INF/member/loginForm.jsp").forward(req, resp);
+				req.getRequestDispatcher("WEB-INF/member/logForm.jsp").forward(req, resp);
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
 }

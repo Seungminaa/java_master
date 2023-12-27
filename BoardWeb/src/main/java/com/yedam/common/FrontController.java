@@ -1,5 +1,5 @@
 package com.yedam.common;
-// 컨트롤러 : url 입력 => 서블릿 실행.
+// 컨트롤러 : url -> 서블릿 실행
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,25 +25,20 @@ import com.yedam.member.command.LogoutControl;
 
 //@WebServlet("*.do")
 public class FrontController extends HttpServlet{
-	// 생명주기(톰캣에서 정함) : 생성자 => init() => service() => destroy()
+	//생명주기 : 생성자 -> init() -> service() -> destroy()
 	
 	Map<String, Control> map;
 	
 	public FrontController() {
-		System.out.println("생성자 호출.");
+		System.out.println("생성자 호출");
 		map = new HashMap<String, Control>();
+		
 	}
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		System.out.println("init() 호출");
-//		map.put("/main.do", new MainControl());
-//		map.put("/sub.do", new SubControl());
-		
-		// 게시판 관련.
-		// URL과 실행할 컨트롤을 연결
-		// 조회한 코드를 HTML로 넘겨주기(JAVA) => boardList.jsp
-		// BoardListControl : Board를 구현하는 컨트롤
+		//한 파일에서 url과 컨트롤러를 확인하기 위함
 		map.put("/boardList.do", new BoardListControl());
 		map.put("/boardForm.do", new BoardFormControl());
 		map.put("/addBoard.do", new AddBoardControl());
@@ -53,27 +48,26 @@ public class FrontController extends HttpServlet{
 		map.put("/removeForm.do", new RemoveFormControl());
 		map.put("/removeBoard.do", new RemoveBoardControl());
 		
-		// 회원 관련.
+		//회원관련
 		map.put("/loginForm.do", new LoginFormControl());
 		map.put("/login.do", new LoginControl());
 		map.put("/logout.do", new LogoutControl());
+//		map.put("/main.do", new MainControl());
+//		map.put("/sub.do", new SubControl());
 	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// service() 실행될 때 요청내용 한글로 인코딩
 		req.setCharacterEncoding("utf-8");
-		
 		System.out.println("service() 호출");
-		// http://localhost/BoardWeb/main.do => mainControl
-		String url = req.getRequestURI();	// /BoardWeb/main.do
-		String context = req.getContextPath();	// /BoardWeb
-		String path = url.substring(context.length()); // /main.do
-		System.out.println(path);
+		//http://localhost/BoardWeb/main.do -> mainControl
+		String url = req.getRequestURI(); // /BoardWeb/main.do
+		String context = req.getContextPath(); // /BoardWeb
+		String path = url.substring(context.length()); //main.do
+		System.out.println(path); //main.do
 		
 		Control ctrl = map.get(path);
 		ctrl.execute(req, resp);
-		
 	}
 	
 	@Override

@@ -22,25 +22,22 @@ public class UpdateStudent extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html; charset=utf-8"); //타입을 html로 변환
+		PrintWriter out = response.getWriter();
 		
 		String sno = request.getParameter("sno");
-		String escore = request.getParameter("escore");
-		String mscore = request.getParameter("mscore");
-		
-		System.out.println("sno: " + sno + ", " + "escore: " + escore + ", mscore: " + mscore);
+		int escore = Integer.parseInt(request.getParameter("escore"));
+		int mscore = Integer.parseInt(request.getParameter("mscore"));;
 		
 		StudentService dao = new StudentServiceImpl();
-		boolean done = dao.modStudent(sno, Integer.parseInt(escore), Integer.parseInt(mscore));
-		PrintWriter out = response.getWriter();
+		boolean done = dao.modStudent(sno,escore,mscore);
 		
 		if(done) {
 			out.println("<script>alert('OK'); location.href='studentList';</script>");
-		}
-		else {
+		}else {
 			out.println("<script>alert('Fail'); location.href='index.html';</script>");
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

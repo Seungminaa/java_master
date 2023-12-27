@@ -10,10 +10,9 @@ import com.yedam.board.vo.BoardVO;
 import com.yedam.common.DataSource;
 
 public class BoardServiceMybatis implements BoardService{
-	
+
 	SqlSession session = DataSource.getInstance().openSession(true);
 	BoardMapper mapper = session.getMapper(BoardMapper.class);
-	
 	
 	@Override
 	public List<BoardVO> boardList() {
@@ -28,17 +27,20 @@ public class BoardServiceMybatis implements BoardService{
 
 	@Override
 	public boolean addBoard(BoardVO vo) {
-		return mapper.insertBoard(vo) == 1;
+		// TODO Auto-generated method stub
+		return mapper.insertBoard(vo)==1;
 	}
 
 	@Override
 	public boolean modBoard(BoardVO vo) {
-		return mapper.updateBoard(vo) == 1;
+		// TODO Auto-generated method stub
+		return mapper.updateBoard(vo)==1;
 	}
 
 	@Override
 	public boolean remBoard(int bno) {
-		return mapper.deleteBoard(bno) == 1;
+		// TODO Auto-generated method stub
+		return mapper.delelteBoard(bno)==1;
 	}
 	
 }

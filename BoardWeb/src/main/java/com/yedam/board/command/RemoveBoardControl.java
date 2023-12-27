@@ -13,25 +13,18 @@ public class RemoveBoardControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		// parameter("bno") - 삭제 - 목록
+		// param("bno") - 삭제 - 목록
 		String bno = req.getParameter("bno");
-		
 		BoardService svc = new BoardServiceMybatis();
-		
-		if(svc.remBoard(Integer.parseInt(bno))) {
-			try {
-				resp.sendRedirect("/BoardWeb/boardList.do");
-			} catch (IOException e) {
-				e.printStackTrace();
+
+		try {
+			if (svc.remBoard(Integer.parseInt(bno))) {
+				resp.sendRedirect("boardList.do");
+			} else {
+				resp.sendRedirect("removeForm.do");
 			}
-		} else {
-			try {
-				resp.sendRedirect("/BoardWeb/getBoard.do?bno=" + bno);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-
 	}
-
 }

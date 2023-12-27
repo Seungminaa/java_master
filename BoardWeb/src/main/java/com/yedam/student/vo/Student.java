@@ -1,58 +1,49 @@
 package com.yedam.student.vo;
 
 public class Student {
-	// 필드
-	private String studentNumber;
-	private String studentName;
-	private int englishScore;
-	private int mathematicsScore;
-	
-	// 생성자
-	public Student(){}
-	
-	public Student(String studentNumber, String studentName, int englishScore, int mathematicsScore) {
-		super();
-		this.studentNumber = studentNumber;
-		this.studentName = studentName;
-		this.englishScore = englishScore;
-		this.mathematicsScore = mathematicsScore;
+	//db 컬럼명과 이름 맞춰야함
+	String studNo; //stud_no
+	String name; // 
+	int eng;
+	int math;
+	public Student(){
+		
 	}
-
-	// 메소드
-	void showInfo() {
-		System.out.println("학번 : " + studentNumber + "이름 : " + this.studentName + "영어 : " + this.englishScore + "수: " + mathematicsScore);
+	public void showInfo() {
+		System.out.println("학생이름 : " + name);
+		System.out.println("학생번호 : " + studNo);
+		System.out.println("영어 : " + eng);
+		System.out.println("수학 : " + math);
 	}
-
-	public String getStudentNumber() {
-		return studentNumber;
+	public String getStudNo() {
+		return studNo;
 	}
-
-	public String getStudentName() {
-		return studentName;
+	public void setStudNo(String studNo) {
+		this.studNo = studNo;
 	}
-
-	public int getEnglishScore() {
-		return englishScore;
+	public String getName() {
+		return name;
 	}
-
-	public int getMathematicsScore() {
-		return mathematicsScore;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public void setStudentNumber(String studentNumber) {
-		this.studentNumber = studentNumber;
+	public int getEng() {
+		return eng;
 	}
-
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+	public void setEng(int eng) {
+		this.eng = eng;
 	}
-
-	public void setEnglishScore(int englishScore) {
-		this.englishScore = englishScore;
+	public int getMath() {
+		return math;
 	}
-
-	public void setMathematicsScore(int mathematicsScore) {
-		this.mathematicsScore = mathematicsScore;
+	public void setMath(int math) {
+		this.math = math;
 	}
-	
+	//생성자
+	public Student(String studNo, String name, int eng, int math) {
+		this.studNo = studNo;
+		this.name = name;
+		this.eng = eng;
+		this.math = math;
+	}
 }

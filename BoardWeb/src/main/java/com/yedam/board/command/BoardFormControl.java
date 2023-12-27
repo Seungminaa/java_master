@@ -14,14 +14,15 @@ public class BoardFormControl implements Control {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// 등록화면 open
-		// Form: 기능 없고 페이지 보여주기 용도
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/addBoardForm.jsp");
-		try {
-			rd.forward(req, resp);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
-
+		
+		
+		//페이지 이동(forward)
+				RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/Board/addBoardForm.jsp");
+				try {
+					rd.forward(req, resp);
+				} catch (ServletException | IOException e) {
+					e.printStackTrace();
+				}
 	}
 
 }

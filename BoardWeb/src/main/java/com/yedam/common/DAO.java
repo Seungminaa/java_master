@@ -1,9 +1,6 @@
 package com.yedam.common;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class DAO {
 	Connection conn;
@@ -11,16 +8,13 @@ public class DAO {
 	ResultSet rs;
 	
 	public Connection getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe"; //연결될 url
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection(url, "dev", "dev");
-			System.out.println("연결성공!!");
+			conn = DriverManager.getConnection(url,"dev","dev"); //url,아디,비번
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return conn;
 	}
-	
-	
 }

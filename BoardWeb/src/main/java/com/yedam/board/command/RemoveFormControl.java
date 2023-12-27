@@ -16,19 +16,20 @@ public class RemoveFormControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		
 		String bno = req.getParameter("bno");
-		
 		BoardService svc = new BoardServiceMybatis();
 		BoardVO vo = svc.getBoard(Integer.parseInt(bno));
 		
 		req.setAttribute("vo", vo);
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/remBoardForm.jsp");
-		try {
-			rd.forward(req, resp);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
 		
+		//페이지 이동(forward)
+				RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/Board/remBoardForm.jsp");
+				try {
+					rd.forward(req, resp);
+				} catch (ServletException | IOException e) {
+					e.printStackTrace();
+				}
+
 	}
+
 }

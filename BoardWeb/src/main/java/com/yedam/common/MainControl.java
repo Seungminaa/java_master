@@ -13,8 +13,11 @@ public class MainControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println("메인컨트롤");
 		BoardService svc = new BoardServiceMybatis();
+		
 		List<BoardVO> list = svc.boardList();
+		
 		for(BoardVO vo : list) {
 			System.out.println(vo.toString());
 		}

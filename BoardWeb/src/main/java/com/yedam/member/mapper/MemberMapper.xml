@@ -2,8 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- id는 구현했던 메소드와 동일하게 작성, resultType은 반환되는 값의 위치=값 -->
 <mapper namespace="com.yedam.member.mapper.MemberMapper">
-	<select id="selectMember" resultType="member">
-		SELECT * FROM member WHERE id=#{id} AND pw=#{pw}
-	</select>
+  <select id="selectMember" resultType="member">
+    select * from member where id =#{id} and pw=#{pw}
+  </select>
+  
 </mapper>
