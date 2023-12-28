@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-	
+	 
     <form name="myForm" action="removeBoard.do">
     <input type="hidden" name="bno" value="${vo.boardNo}">
 	    <table class="table">

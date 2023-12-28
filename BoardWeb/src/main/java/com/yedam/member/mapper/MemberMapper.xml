@@ -7,5 +7,7 @@
   <select id="selectMember" resultType="member">
     select * from member where id =#{id} and pw=#{pw}
   </select>
-  
+  <select id="selectList" resultType="member">
+    select * from member
+  </select>
 </mapper>

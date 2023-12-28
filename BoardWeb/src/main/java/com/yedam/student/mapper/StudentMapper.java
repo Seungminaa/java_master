@@ -9,4 +9,5 @@ public interface StudentMapper {
 	List<Student> studentList();
 	int addStudent(Student std); //#{studNo}
 	int remStudent(String sno); //#{sno}
+	
 }

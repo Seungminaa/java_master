@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 	<h3>수정화면</h3>
-
+ 
     <form action="modifyBoard.do">
     <input type="hidden" name="bno" value="${vo.boardNo}">
 	    <table class="table">

@@ -27,7 +27,7 @@
             	</c:choose>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">글목록</a>
-                    
+                    ${responsibility }
 					<c:choose>
 					<c:when test="${empty logId }">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인</a>
@@ -45,7 +45,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">글등록</a>
                     </c:otherwise>
             		</c:choose>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">회원목록</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>

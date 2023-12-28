@@ -16,6 +16,16 @@
   <put-attribute name="body" value="/student/{1}.jsp"/>
   </definition>
   
+  <definition name="myadmin" template="/WEB-INF/admin/template.jsp">
+  <put-attribute name="nav" value="/WEB-INF/admin/nav.jsp"/>
+  <put-attribute name="menu" value="/WEB-INF/admin/menu.jsp"/>
+  <put-attribute name="body" value="/WEB-INF/admin/body.jsp"/>
+  </definition>
+  
+  <definition name="WILDCARD:admin/*" extends="myadmin">
+  <put-attribute name="body" value="/WEB-INF/member/{1}.jsp"/>
+  </definition>
+  
   <definition name="myhomepage" template="/WEB-INF/board/layout/template.jsp">
   <put-attribute name="menu" value="/WEB-INF/board/layout/menu.jsp"/>
   <put-attribute name="nav" value="/WEB-INF/board/layout/nav.jsp"/>

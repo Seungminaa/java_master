@@ -30,7 +30,9 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">글등록</a>
                     </c:otherwise>
             		</c:choose>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+            		<c:if test="${responsibility eq 'Admin'}">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원목록</a>
+                    </c:if>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>

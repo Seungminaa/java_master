@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,7 +24,7 @@
                 <!-- Top navigation nav.jsp-->
 			<tiles:insertAttribute name="nav"/>
                 
-                
+               
                 <!-- Page content body.jsp-->
                 <div class="container-fluid">
 			<tiles:insertAttribute name="body"/>

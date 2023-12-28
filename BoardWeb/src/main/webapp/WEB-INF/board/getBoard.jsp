@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-
+ 
     <h3>상세화면</h3>
     <form name="myForm" action="modifyForm.do">
     <input type="hidden" name="bno" value="${vo.boardNo}">
