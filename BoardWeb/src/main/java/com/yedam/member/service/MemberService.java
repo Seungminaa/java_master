@@ -6,6 +6,7 @@ import com.yedam.member.vo.MemberVO;
 
 public interface MemberService {
 	public MemberVO login(String id,String pw);
-	public List<MemberVO> memberList(); 
+	public List<MemberVO> memberList();
+	public MemberVO getMember(int mno); 
 }
 

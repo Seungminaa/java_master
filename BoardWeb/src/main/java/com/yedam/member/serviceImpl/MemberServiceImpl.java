@@ -24,5 +24,11 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return mapper.selectList();
 	}
+
+	@Override
+	public MemberVO getMember(int mno) {
+		// TODO Auto-generated method stub
+		return mapper.selectDanMember();
+	}
 	
 }

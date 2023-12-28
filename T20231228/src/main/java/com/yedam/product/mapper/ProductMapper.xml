@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.product.mapper.ProductMapper">
+  <select id="selectList" resultType="product">
+  select * from product order by like_it desc
+  </select>
+  
+  <select id="getProduct" resultType="product">
+  select * from product where product_code =#{pcode}
+  </select>
+  
+</mapper>

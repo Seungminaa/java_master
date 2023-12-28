@@ -10,4 +10,7 @@
   <select id="selectList" resultType="member">
     select * from member
   </select>
+  <select id="selectDanMember" resultType="member">
+    select * from member where id=#{mno}
+  </select>
 </mapper>

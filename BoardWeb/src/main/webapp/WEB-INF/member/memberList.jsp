@@ -14,7 +14,7 @@
 	</thead>
 	<c:forEach var="vo" items="${memberList }">
 		<tr>
-			<td>${vo.id }</td>
+			<td><a href="getMember.do?id=${vo.id }">${vo.id }</a></td>
 			<td>${vo.pw }</td>
 			<td>${vo.name }</td>
 			<td>${vo.responsibility }</td>
