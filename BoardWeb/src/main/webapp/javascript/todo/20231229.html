@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo/20231229.html</title>
+    <style>
+        #show{
+            width: 300px;
+            height: 250px;
+            background-color: aqua;
+        }
+        span{
+            display: inline-block;
+            width: 80px;
+            height: 30px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- span 태그 안에 단어가 추가 되도록-->
+    <div id="show">
+        <span>Lorem</span>
+        <span>ipsum</span>
+        .
+    </div>
+    <script>
+        const words = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat tenetur maiores rerum ut quod omnis similique error dolor blanditiis modi consequatur obcaecati veritatis placeat harum, quibusdam laudantium deserunt necessitatibus facere?';
+        
+        const wordAry = words.split(' ');
+        console.log(wordAry);
+    </script>
+</body>
+</html>

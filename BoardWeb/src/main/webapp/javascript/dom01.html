@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom01.html</title>
+</head>
+<body>
+    <!-- 표 -->
+    
+
+    <script>
+        //함수 선언 const
+        //객체 선언 let
+        
+        
+        console.log(window);
+        let btn = document.createElement('button'); //Document object
+        btn.innerText = 'btn';
+        btn.addEventListener('click',function(){
+            window.alert('클릭');
+        });
+        
+        console.log(btn);
+        
+        document.querySelector('body').appendChild(btn);
+        
+        let a = document.createElement('table'); //요소생성
+        let b = document.createElement('ul');
+        
+        const f = ['Apple','banana','cherry'];
+        for(let f1 of f){ //요소안에 값 넣기
+            let b1 = document.createElement('li');
+            b1.innerText = f1;
+            b.appendChild(b1);
+        }
+        a.appendChild(b); //부모요소에 자식요소 넣음
+        
+        
+        let c = document.querySelector('body');
+        c.append(a);
+        
+        let d = document.createElement('table');
+        let d1 = document.createElement('thead');
+        let d2 = document.createElement('tr');
+
+        d.appendChild(d1).appendChild(d2);
+
+        const k = ['아이디','이름','전화번호'];
+        for(let k1 of k){
+            let k2 = document.createElement('th');
+            k2.innerHTML = k1;
+            d2.append(k2);
+        }
+
+        let r1 = document.createElement('tbody');
+        let r2 = document.createElement('tr');
+        
+        d.appendChild(r1).appendChild(r2);
+        const z = ['user1','홍길동','010-1111'];
+        for(let z1 of z){
+            let z2 = document.createElement('td');
+            z2.innerHTML = z1;
+            r2.append(z2);
+        }
+        let e = document.querySelector('body');
+        e.append(d);
+    </script>
+</body>
+</html>
