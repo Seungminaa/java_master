@@ -21,15 +21,20 @@
 <body>
     <!-- span 태그 안에 단어가 추가 되도록-->
     <div id="show">
-        <span>Lorem</span>
-        <span>ipsum</span>
-        .
+        
     </div>
     <script>
         const words = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat tenetur maiores rerum ut quod omnis similique error dolor blanditiis modi consequatur obcaecati veritatis placeat harum, quibusdam laudantium deserunt necessitatibus facere?';
         
         const wordAry = words.split(' ');
-        console.log(wordAry);
+        
+        let div = document.getElementById('show');
+        for(let p in wordAry){
+            let span = document.createElement('span');
+            span.innerText = wordAry[p];
+            div.appendChild(span);
+        }
+
     </script>
 </body>
 </html>
