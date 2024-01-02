@@ -7,84 +7,101 @@
 </head>
 <body>
     <p>Hello</p>
+	 <!-- <script src="js/valiable.js"></script> -->
     <script>
-        //var : 함수레벨, let, const : block 레벨(괄호안에서 선언시 괄호 내에서만 처리됨)
-        var name = "Hwang";
-        function myfunc()
-        {
-            var name = 'Hong';
-            console.log(name);
-            console.log(this);
+       function myfunc(){
+            console.log('myfunc call.');
+            //return undefined;
+       }
+       console.log(myfunc());
+       // null, undefined.
+       let num =null;
+       console.log(typeof num);
 
-        }
-        myfunc();
-        console.log(name);
+       let num1;
+       let num2 =null;
+       console.log(num1 === num2); //값, 타입 비교
+
+       if(!num1){ //null, undefined, '', 0 => false
+        console.log('num값은 false입니다');
+       }
+
+       // parseInt, parseFloat
+        num1 = '30';
+        console.log(num1,typeof num1);
         
-        let age = 20;
-        // function myfunc2() 
-        {
-            let age = 22;
-            console.log(age);            
+        //NaN 숫자값으로 바꿀수 없는 값
+        num1 = parseInt(num1);
+        console.log(num1,typeof num1);
+
+        //삼항연산자
+        let result = 3 > 2 ? 'true' : 'false';
+        //
+        console.log(!'문자열');
+
+        // 비트연산자
+        console.log(12 & 3); // 1100 & 0011 
+        console.log(12 >> 2); // 1100 & 0011
+        
+        let friends = [{name:'라이언',age:5},{name:'어파치',age:4}];
+        for(let friend of friends){
+            // console.log('이름' + friend.name + '나이' + friend.age);
         }
-        // myfunc2();
-        console.log(age);
-        let obj ={
-            id:'Hong',
-            age:20,
-            show:function(){
-                console.log(this);
+        //for ~ in
+        for(let prod in friends[0]){
+            // console.log('속성' + prod + '값' + friends[0][prod]);
+        }
+
+        // forEach
+        friends[friends.length] = {name:'콘',age:2}
+        friends[friends.length] = {name:'무지',age:3}
+        // friends.forEach(function(friend,idx,friendAry){
+        //     if(friend.age>3){
+        //         console.log(friend,idx,friendAry);
+        //     }
+        //     if(idx %2 ==0){
+        //         console.log(friend,idx,friendAry);
+        //     }
+        //     if(idx ==friendAry.length-1){
+        //         console.log(friend,idx,friendAry);
+        //     }
+        // })
+        
+
+        let div = document.createElement('div')
+        div.setAttribute('id','show');
+        let table = document.createElement('table');
+        table.setAttribute('border',1);
+        let thead = document.createElement('thead');
+        let tr = document.createElement('tr');
+        
+        div.appendChild(table).appendChild(thead).appendChild(tr);
+        
+        for(let prod in friends[0]){
+            let th = document.createElement('th');
+            th.innerText = prod;
+            tr.appendChild(th);
+        }
+        
+        let tbody = document.createElement('tbody');
+        tbody.setAttribute('id','list');
+
+        friends.forEach(makeFriend);
+        
+        function makeFriend(friend,idx,friendAry){
+            let tr1 = document.createElement('tr');
+            for(let prod in friend){
+                let td1 = document.createElement('td');
+                td1.innerText = friend[prod];
+                tr1.appendChild(td1);
             }
-        }
-        obj.show();
-        document.body.addEventListener('click',function(){
-            console.log(this);
-        })
-        // this 객체의 정의
-        // 1. 전역영역 : window 객체
-        // 2. 함수 : window 객체
-        // 3. 객체 : object(자기자신)
-        // 4. 이벤트 : 이벤트 실행 대상
-        console.log(this);
-
-        //변수로 선언한 변수명은 함수로 사용못함
-        // let show = 'Hello';
-        // function show(){
-        //     console.log('show');
-        // }
-        
-        // () 실행
-        let show = function(){
-            console.log('show');
-            // return 값이 없으면 undefined로 정의 되있음
-            // return undefined;
-            return '반환값';
-        }
-        console.log(show());
-
-        //함수정의 구문을 괄호로 묶으면 실행가능
-        //()가 있으면 실행하겠다는 의미
-        (function(){
-            console.log('익명함수');
-        })();
-
-        // 함수명명 규칙, 카멜케이스
-        function showMyName(){
-            console.log('홍길동');
+            table.appendChild(tbody).appendChild(tr1);
         }
 
-        // 상수선언
-        const height = 167.9;
-        // height = 169;
+        document.querySelector('body').appendChild(div);
 
-        //타입은 상관없음
-        const friend = {
-            name:'홍길동',
-            phone:'010-1111'
-        }
 
-        friend.phone = '010-2222';
 
-        // friend = {}
 
     </script>
 </body>

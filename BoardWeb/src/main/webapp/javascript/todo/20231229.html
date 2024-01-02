@@ -15,10 +15,13 @@
             width: 80px;
             height: 30px;
             background-color: yellow;
+            margin: 2px;
         }
     </style>
 </head>
 <body>
+	<input type="text" name="userValue" id="userValue">
+    <button id="delBnt">삭제</button>
     <!-- span 태그 안에 단어가 추가 되도록-->
     <div id="show">
         
@@ -29,12 +32,26 @@
         const wordAry = words.split(' ');
         
         let div = document.getElementById('show');
-        for(let p in wordAry){
+        wordAry.forEach(function (word){
             let span = document.createElement('span');
-            span.innerText = wordAry[p];
+            span.innerText=word;
             div.appendChild(span);
-        }
+        });
 
+        // id=delBnt에 클릭
+        document.getElementById('delBnt').addEventListener('click',function(){
+            // 사용자 입력값 = 화면상에 span요소를 가져와서 비교 span.remove();
+            // 사용자 입력화면 초기화
+            let userInput = document.getElementById('userValue').value;
+            const w = document.querySelectorAll('span');
+            w.forEach(function(span){
+                if(span.innerText == userInput){
+                    span.remove();
+                }
+            });
+            document.getElementById('userValue').value ='';
+
+        });
     </script>
 </body>
 </html>
