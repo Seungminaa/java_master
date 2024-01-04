@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo/20231229.html</title>
+    <style>
+        #show{
+            width: 300px;
+            height: 250px;
+            background-color: aqua;
+        }
+        span{
+            display: inline-block;
+            width: 80px;
+            height: 30px;
+            background-color: yellow;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+	<input type="text" name="userValue" id="userValue">
+    <button id="delBnt">삭제</button>
+    <!-- span 태그 안에 단어가 추가 되도록-->
+    <div id="show">
+        
+    </div>
+    <script>
+        const words = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat tenetur maiores rerum ut quod omnis similique error dolor blanditiis modi consequatur obcaecati veritatis placeat harum, quibusdam laudantium deserunt necessitatibus facere?';
+        
+        const wordAry = words.split(' ');
+        
+        // let div = document.getElementById('show');
+        // wordAry.forEach(function (word){
+        //     let span = document.createElement('span');
+        //     span.innerText=word;
+        //     div.appendChild(span);
+        // });
+        
+        let show = document.getElementById('show');
+        wordAry.reduce((acc,word)=>{
+            let span = document.createElement('span');
+            span.innerText=word;
+            acc.appendChild(span);
+            return acc;
+        }, show);
+
+
+
+        // id=delBnt에 클릭
+        document.getElementById('delBnt').addEventListener('click',function(){
+            // 사용자 입력값 = 화면상에 span요소를 가져와서 비교 span.remove();
+            // 사용자 입력화면 초기화
+            let userInput = document.getElementById('userValue').value;
+            const w = document.querySelectorAll('span');
+            w.forEach(function(span){
+                if(span.innerText == userInput){
+                    span.remove();
+                }
+            });
+            document.getElementById('userValue').value ='';
+
+        });
+    </script>
+</body>
+</html>
