@@ -11,6 +11,8 @@ import com.yedam.member.mapper.MemberMapper;
 import com.yedam.member.service.MemberService;
 import com.yedam.member.serviceImpl.MemberServiceImpl;
 import com.yedam.member.vo.MemberVO;
+import com.yedam.reply.mapperImpl.ReplyServiceImpl;
+import com.yedam.reply.service.ReplyService;
 
 public class MainExe {
 	public static void main(String[] args) {
@@ -23,14 +25,8 @@ public class MainExe {
 //		for(BoardVO vo : list) {
 //			System.out.println(vo.toString());
 //		}
-		MemberService svc = new MemberServiceImpl();
+		ReplyService svc = new ReplyServiceImpl();
+		svc.replyList(2).forEach(reply -> System.out.println(reply));
 		
-		MemberVO vo = svc.login("user1", "1111"); 
-		
-		if(vo != null) {
-			System.out.println(vo);
-		}else {
-			System.out.println("실패");
-		}
 	}
 }

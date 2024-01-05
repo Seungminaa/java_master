@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax.html</title>
+</head>
+<body>
+    <table border="1">
+        <thead id="theader">
+            <tr>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>이메일</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <script>
+
+        const fields = ['id','firstName','email']
+        const xhtp = new XMLHttpRequest();
+        xhtp.open('get','dataset.xml'); // 서버요청페이지
+        xhtp.send(); // 서버에 요청보냄
+        xhtp.onload = function(){
+            let doc = xhtp.responseXML;
+            doc.querySelectorAll('record').forEach((record) => {
+                console.log(record.children[1].innerHTML)
+            })
+        }
+
+
+        function makeJson(){
+            let data = JSON.parse(xhtp.responseText); // json의 문자열을 data타입에 맞게 조정해줌 
+            console.log(data);
+            let tbody = document.querySelector('#tbody');
+            data.forEach((item) => {
+                let tr = document.createElement('tr');
+                fields.forEach(field => {
+                    let td = document.createElement('td');
+                    td.innerText = item[field];
+                    tr.appendChild(td)
+                })
+                tbody.appendChild(tr)
+            });
+        }
+    </script>
+</body>
+</html>

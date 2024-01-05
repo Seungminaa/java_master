@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- id는 구현했던 메소드와 동일하게 작성, resultType은 반환되는 값의 위치=값 -->
+<mapper namespace="com.yedam.reply.mapper.ReplyMapper">
+  <select id="replyList" resultType="reply" parameterType="int">
+    select * from reply where board_no=${bno}
+  </select>
+  <delete id="deleteReply" parameterType="int">
+  	delete from reply where reply_no = #{replyNo}
+  </delete>
+  
+</mapper>
