@@ -1,6 +1,6 @@
 package com.yedam.reply.command;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,15 +20,17 @@ public class ReplyListJson implements Control {
 		// [{"replyNo":4,"boardNo":2,...},{}]
 		resp.setContentType("text/json;charset=utf-8");
 		String bno = req.getParameter("bno");
+		String page = req.getParameter("page");
+		
 		ReplyService svc = new ReplyServiceImpl();
-		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno));
+		List<ReplyVO> list = svc.replyListPaging(Integer.parseInt(bno),Integer.parseInt(page));
 		int cnt = list.size();
 		String json = "[";
 		for(int i=0;i<cnt;i++) {
 			json += "{\"replyNo\":" + list.get(i).getReplyNo() + ",\"boardNo\":" 
 					+ list.get(i).getBoardNo() + ",\"reply\":\"" 
-					+ list.get(i).getReply() + "\",\"replyer\":\"" 
-					+ list.get(i).getReplyer() + "\"}";
+					+ list.get(i).getReply() + "\",\"name\":\"" 
+					+ list.get(i).getName() + "\"}";
 			if(i != cnt-1) {
 				json += ",";
 			}

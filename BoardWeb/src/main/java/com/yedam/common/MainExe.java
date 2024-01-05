@@ -26,7 +26,8 @@ public class MainExe {
 //			System.out.println(vo.toString());
 //		}
 		ReplyService svc = new ReplyServiceImpl();
-		svc.replyList(2).forEach(reply -> System.out.println(reply));
+		svc.replyListPaging(2, 3).forEach(reply -> System.out.println(reply));
+		
 		
 	}
 }

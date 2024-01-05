@@ -54,12 +54,14 @@
 	</table>
 </form>
 <br>
+<p>댓글내용: <input type="text" id="content"><button id="addReply">등록</button></p>
 <p>댓글목록</p>
 <div id="show">
 	<ul id="list">
 	</ul>
 </div>
 <a href="boardList.do">글목록으로</a>
+<script src="js/service.js"></script>
 <script>
 	function deleteFunc(){
         console.log(window);
@@ -67,50 +69,48 @@
         document.forms.myForm.submit();
 	}
 	
+	let ul = document.querySelector('#list');
 	//Ajax 호출
 	const bno = '${vo.boardNo}';
 	const xhtp = new XMLHttpRequest();
 	xhtp.open('get','replyListJson.do?bno=' + bno);
 	xhtp.send();
 	xhtp.onload = function(){
-		let ul = document.querySelector('#list');
 		let data = JSON.parse(xhtp.responseText); //json문자열 -> 객체
 		data.forEach(reply => {
-			console.log(reply);
 			
-			let li = document.createElement('li');
-			for(let i in reply){
-				if(i != 'boardNo'){
-					let span = document.createElement('span');
-					span.innerText = i +" : "+ reply[i];
-					li.appendChild(span);
-				}
-			}
-			
-			//삭제버튼
-			let btn = document.createElement('button');
-			btn.addEventListener('click',function(){
-				// 댓글번호 삭제 후 화면에서 제거
-				let delHtp = new XMLHttpRequest();
-				delHtp.open('get','delReplyJson.do?rno=' + reply.replyNo);
-				delHtp.send();
-				delHtp.onload = function(){
-					let result = JSON.parse(delHtp.responseText);
-					if(result.retCode == 'OK'){
-						alert('삭제됨');
-						btn.parentElement.remove();
-					}else if(result.retCode == 'NG'){
-						alert('삭제중 애러');
-					}
-				}
-
-			})
-			btn.innerText = '삭제';
-			li.appendChild(btn);
+			let li = makeLi(reply); //li 부분(service.js)
 			
 			ul.appendChild(li);
 		})
 		console.log(xhtp.responseText);
 	}
+	
+	// 등록버튼 클릭 이벤트 생성
+	document.querySelector('#addReply').addEventListener('click',function(){
+		let reply = document.querySelector('#content').value;
+		let replyer = '${logId}';
+		console.log(replyer);
+
+		const addAjax = new XMLHttpRequest();
+		addAjax.open('get','addReplyJson.do?reply='+reply + '&replyer='+replyer+'&bno='+bno);
+		addAjax.send();
+		addAjax.onload = function(){
+			console.log(addAjax.responseText);
+			let result = JSON.parse(addAjax.responseText);
+			//if문 시작
+			if(result.retCode =='OK'){
+			let reply = result.vo;
+			
+			let li = makeLi(reply); // li 부분(service.js)
+			
+			ul.appendChild(li);
+
+			document.querySelector('#content').value ='';
+			}else if(result.retCode =='NG'){
+				alert('처리중 애러');
+			}
+		}
+	});
 	
 </script>

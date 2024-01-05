@@ -24,6 +24,7 @@ import com.yedam.member.command.LoginControl;
 import com.yedam.member.command.LoginFormControl;
 import com.yedam.member.command.LogoutControl;
 import com.yedam.member.command.MemberListControl;
+import com.yedam.reply.command.AddReplyJson;
 import com.yedam.reply.command.DelReplyJson;
 import com.yedam.reply.command.ReplyListJson;
 import com.yedam.student.command.studInfoCont;
@@ -72,6 +73,7 @@ public class FrontController extends HttpServlet{
 		//댓글관련. json 포멧의 데이터를 생성해서 반환
 		map.put("/replyListJson.do", new ReplyListJson());
 		map.put("/delReplyJson.do", new DelReplyJson());
+		map.put("/addReplyJson.do", new AddReplyJson());
 	}
 	
 	@Override
