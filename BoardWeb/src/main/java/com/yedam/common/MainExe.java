@@ -13,6 +13,7 @@ import com.yedam.member.serviceImpl.MemberServiceImpl;
 import com.yedam.member.vo.MemberVO;
 import com.yedam.reply.mapperImpl.ReplyServiceImpl;
 import com.yedam.reply.service.ReplyService;
+import com.yedam.reply.vo.PageDTO;
 
 public class MainExe {
 	public static void main(String[] args) {
@@ -27,6 +28,11 @@ public class MainExe {
 //		}
 		ReplyService svc = new ReplyServiceImpl();
 		svc.replyListPaging(2, 3).forEach(reply -> System.out.println(reply));
+		
+		int total = 175;
+		PageDTO dto = new PageDTO(2, total);
+		
+		System.out.println(dto.toString());
 		
 		
 	}

@@ -32,5 +32,9 @@
 	where b.rn > (#{page}-1)*5 and b.rn <= #{page}*5
 	]]>
   </select>
+  <select id="selectCount" resultType="int" parameterType="int">
+  	select count(*) from reply where board_no = #{boardNo}
+  </select>
+  
   <!-- CDATA : 등호표시(><) 가능하게 만듦 -->
 </mapper>

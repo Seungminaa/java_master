@@ -26,7 +26,8 @@ let li = document.createElement('li');
 					let result = JSON.parse(delHtp.responseText);
 					if(result.retCode == 'OK'){
 						alert('삭제됨');
-						btn.parentElement.remove();
+						//btn.parentElement.remove();
+						// bno, page => 페이지리스트, 페이징리스트
 					}else if(result.retCode == 'NG'){
 						alert('삭제중 애러');
 					}

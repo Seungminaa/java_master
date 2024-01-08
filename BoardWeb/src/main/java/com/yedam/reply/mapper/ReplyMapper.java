@@ -12,4 +12,5 @@ public interface ReplyMapper {
 	int insertReply(ReplyVO vo);
 	ReplyVO selectReply(int replyNo);
 	List<ReplyVO> replyListPaging(@Param("boardNo") int boardNo, @Param("page") int page);
+	int selectCount(int boardNo);
 }

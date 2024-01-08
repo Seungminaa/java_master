@@ -10,5 +10,5 @@ public interface ReplyService {
 	boolean addReply(ReplyVO vo);
 	ReplyVO getReply(int replyNo);
 	List<ReplyVO> replyListPaging(int boardNo,int page);
-	
+	int getTotalCnt(int boardNo);
 }

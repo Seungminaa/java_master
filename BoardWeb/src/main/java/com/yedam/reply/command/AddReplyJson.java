@@ -18,6 +18,7 @@ public class AddReplyJson implements Control {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
+		resp.setContentType("text/json;charset=utf-8");
 		String bno = req.getParameter("bno");
 		String reply = req.getParameter("reply");
 		String replyer = req.getParameter("replyer");
