@@ -1,5 +1,6 @@
 package com.yedam.reply.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.yedam.reply.vo.ReplyVO;
@@ -11,4 +12,5 @@ public interface ReplyService {
 	ReplyVO getReply(int replyNo);
 	List<ReplyVO> replyListPaging(int boardNo,int page);
 	int getTotalCnt(int boardNo);
+	List<HashMap<String,Object>> chartData();
 }

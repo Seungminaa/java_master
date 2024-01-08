@@ -131,28 +131,18 @@
 					function pageList(e) {
 						e.preventDefault(); // 기능차단
 						pageInfo = this.getAttribute("href");
+						showList(pageInfo);
 
-						const pageAjax = new XMLHttpRequest();
-						pageAjax.open('get', 'replyListJson.do?bno=' + bno + "&page=" + pageInfo);
-						pageAjax.send();
-						pageAjax.onload = function () {
-							let data = JSON.parse(pageAjax.responseText); //json문자열 -> 객체
-							ul.innerHTML = '';
-							data.forEach(reply => {
-								let li = makeLi(reply); //li 부분(service.js)
-								ul.appendChild(li);
-							})
-							console.log(pageAjax.responseText);
-						}
 						//페이지를 생성하는 함수를 호출
 						pagingList(pageInfo);
 					}//pageList
 
 					//Ajax 호출
 					//페이지 5건씩 그려주는 부분(댓글 목록)
-					function showList(pageInfo) {
+					function showList(page) {
+						ul.innerHTML = '';
 						const xhtp = new XMLHttpRequest();
-						xhtp.open('get', 'replyListJson.do?bno=' + bno + "&page=" + pageInfo);
+						xhtp.open('get', 'replyListJson.do?bno=' + bno + "&page=" + page);
 						xhtp.send();
 						xhtp.onload = function () {
 							let data = JSON.parse(xhtp.responseText); //json문자열 -> 객체
@@ -162,11 +152,10 @@
 	
 								ul.appendChild(li);
 							})
-							console.log(xhtp.responseText);
 						}
 					} //showList
-					showInfo(pageInfo);
-
+					showList(pageInfo);
+					
 					//페이지 생성
 					let paging = document.querySelector('#paging');
 					pagingList();
@@ -229,12 +218,9 @@
 							let result = JSON.parse(addAjax.responseText);
 							//if문 시작
 							if (result.retCode == 'OK') {
-								let reply = result.vo;
-
-								let li = makeLi(reply); // li 부분(service.js)
-
-								ul.appendChild(li);
-
+								pageInfo = 1;
+								showList(pageInfo);
+								pagingList();
 								document.querySelector('#content').value = '';
 							} else if (result.retCode == 'NG') {
 								alert('처리중 애러');

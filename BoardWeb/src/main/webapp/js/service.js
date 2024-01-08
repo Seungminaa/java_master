@@ -2,7 +2,7 @@
  * service.js 
  */
 function makeLi(reply ={}){
-let li = document.createElement('li');
+		let li = document.createElement('li');
 			for(let i in reply){
 				if(i == 'name'){
 					let span = document.createElement('span');
@@ -14,6 +14,7 @@ let li = document.createElement('li');
 					li.appendChild(span);
 				}
 			}
+			console.log(pageInfo);
 			
 			//삭제버튼
 			let btn = document.createElement('button');
@@ -28,6 +29,8 @@ let li = document.createElement('li');
 						alert('삭제됨');
 						//btn.parentElement.remove();
 						// bno, page => 페이지리스트, 페이징리스트
+						showList(pageInfo);
+						
 					}else if(result.retCode == 'NG'){
 						alert('삭제중 애러');
 					}

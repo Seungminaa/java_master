@@ -1,6 +1,6 @@
 package com.yedam.reply.mapper;
 
-import java.util.List;
+import java.util.*;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +13,6 @@ public interface ReplyMapper {
 	ReplyVO selectReply(int replyNo);
 	List<ReplyVO> replyListPaging(@Param("boardNo") int boardNo, @Param("page") int page);
 	int selectCount(int boardNo);
+	// 차트 데이터(댓글자, 작성건수)
+	List<HashMap<String, Object>> selectReplyCnt();
 }

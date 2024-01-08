@@ -1,5 +1,6 @@
 package com.yedam.reply.mapperImpl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -42,6 +43,11 @@ public class ReplyServiceImpl implements ReplyService{
 	public int getTotalCnt(int boardNo) {
 		// TODO Auto-generated method stub
 		return mapper.selectCount(boardNo);
+	}
+	@Override
+	public List<HashMap<String, Object>> chartData() {
+		// TODO Auto-generated method stub
+		return mapper.selectReplyCnt();
 	}
 
 }

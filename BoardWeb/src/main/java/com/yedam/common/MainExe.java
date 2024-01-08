@@ -1,10 +1,13 @@
 package com.yedam.common;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yedam.board.mapper.BoardMapper;
 import com.yedam.board.vo.BoardVO;
 import com.yedam.member.mapper.MemberMapper;
@@ -34,6 +37,8 @@ public class MainExe {
 		
 		System.out.println(dto.toString());
 		
-		
+		List<HashMap<String,Object>> list = svc.chartData();
+		Gson gson = new GsonBuilder().create();
+		System.out.println(gson.toJson(list));
 	}
 }
