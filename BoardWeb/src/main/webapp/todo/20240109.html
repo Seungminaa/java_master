@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
+			//목록추가
 			$('#addBtn').on("click",function(){
 				let id = $('input[name="memberId"]').val();
 				let name = $('input[name="memberName"]').val();
@@ -24,14 +25,19 @@
 				
 				$('input').val("");
 			});
+			//목록삭제
 			$('#delSelected').on('click',function(){
 				//$(':checked').parent().parent().remove();
 				//tbody를 만나기 전까지의 부모요소
-				$(':checked').parentsUntil('tbody').remove();
+				$('#list :checked').parentsUntil('tbody').remove();
 			})
+			//체크박스
 			$('thead input').on('click',function(){
-				
-				$('input').attr('checked');
+				if($('thead input').is(':checked')){
+					$('tbody input').prop("checked",true);
+				}else{
+					$('tbody input').prop("checked",false);
+				}
 			})
 			
         })
@@ -69,7 +75,7 @@
                 <th>회원아이디</th>
                 <th>회원명</th>
                 <th>회원연락처</th>
-                <th><input type="checkbox" name="all"></th>
+                <th><input type="checkbox"></th>
             </tr>
         </thead>
         <tbody id="list">

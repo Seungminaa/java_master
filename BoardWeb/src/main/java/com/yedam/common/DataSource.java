@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class DataSource {
 	private static SqlSessionFactory sqlSessionFactory;
 	private DataSource() {
-		// TODO Auto-generated constructor stub
 	}
 
 	//SqlSessionFactory 반환
