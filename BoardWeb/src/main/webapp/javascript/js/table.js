@@ -119,6 +119,7 @@ document.querySelector('body').appendChild(d);
             td1.setAttribute('align','center');
             // button 이벤트 등록
             td1.addEventListener('click',function (e) { //이벤트 핸들러
+            	//e.evetPropagation();
                 e.stopPropagation(); // 상위요소로 이벤트 전파 차단
             });
             btn1.innerText='선택삭제';

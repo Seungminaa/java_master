@@ -139,7 +139,7 @@
 
 					//Ajax 호출
 					//페이지 5건씩 그려주는 부분(댓글 목록)
-					function showList(page) {
+					function showList_backup(page) {
 						ul.innerHTML = '';
 						const xhtp = new XMLHttpRequest();
 						xhtp.open('get', 'replyListJson.do?bno=' + bno + "&page=" + page);
@@ -154,6 +154,21 @@
 							})
 						}
 					} //showList
+					
+					//promise 방식
+					function showList(page){
+						ul.innerHTML = '';
+						fetch("replyListJson.do?bno=" + bno + "&page=" + page)
+						.then(str => str.json())
+						.then(result => {
+							result.forEach(reply => {
+								let li = makeLi(reply);
+								ul.appendChild(li);
+							})
+						})
+						.catch(reject => console.log(reject));
+					}
+					
 					showList(pageInfo);
 					
 					//페이지 생성
@@ -210,14 +225,37 @@
 						let replyer = '${logId}';
 						console.log(replyer);
 
-						const addAjax = new XMLHttpRequest();
-						addAjax.open('get', 'addReplyJson.do?reply=' + reply + '&replyer=' + replyer + '&bno=' + bno);
-						addAjax.send();
-						addAjax.onload = function () {
-							console.log(addAjax.responseText);
-							let result = JSON.parse(addAjax.responseText);
-							//if문 시작
+						// const addAjax = new XMLHttpRequest();
+						// addAjax.open('post', 'addReplyJson.do');
+						// addAjax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+						// addAjax.send('reply=' + reply + '&replyer=' + replyer + '&bno=' + bno);
+						// addAjax.onload = function () {
+						// 	console.log(addAjax.responseText);
+						// 	let result = JSON.parse(addAjax.responseText);
+						// 	//if문 시작
+						// 	if (result.retCode == 'OK') {
+						// 		alert('처리성공');
+						// 		pageInfo = 1;
+						// 		showList(pageInfo);
+						// 		pagingList();
+						// 		document.querySelector('#content').value = '';
+						// 	} else if (result.retCode == 'NG') {
+						// 		alert('처리중 애러');
+						// 	}
+						// }
+						
+						// fetch함수
+						fetch('addReplyJson.do',{
+							method:'post',
+							headers:{
+								'Content-Type' : 'application/x-www-form-urlencoded'
+							},
+							body:'reply=' + reply + '&replyer=' + replyer + '&bno=' + bno
+						})
+						.then(str => str.json())
+						.then(result => {
 							if (result.retCode == 'OK') {
+								alert('처리성공');
 								pageInfo = 1;
 								showList(pageInfo);
 								pagingList();
@@ -225,7 +263,8 @@
 							} else if (result.retCode == 'NG') {
 								alert('처리중 애러');
 							}
-						}
+						})
+						.catch(err => console.error(err));
 					});
 
 				</script>

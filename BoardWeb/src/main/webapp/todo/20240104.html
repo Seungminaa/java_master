@@ -7,7 +7,7 @@
     <style>
         #show{
             width: 300px;
-            height: 250px;
+            height: 360px;
             background-color: aqua;
         }
         span{
@@ -18,16 +18,10 @@
             margin: 2px;
         }
     </style>
-</head>
-<body>
-	<input type="text" name="userValue" id="userValue">
-    <button id="delBnt">삭제</button>
-    <!-- span 태그 안에 단어가 추가 되도록-->
-    <div id="show">
-        
-    </div>
     <script>
-        const words = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat tenetur maiores rerum ut quod omnis similique error dolor blanditiis modi consequatur obcaecati veritatis placeat harum, quibusdam laudantium deserunt necessitatibus facere?';
+		// DOMContentLoaded : 이 페이지의 모든 DOM요소를 Load한 다음에 실행
+		document.addEventListener('DOMContentLoaded',function() {
+		const words = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat tenetur maiores rerum ut quod omnis similique error dolor blanditiis modi consequatur obcaecati veritatis placeat harum, quibusdam laudantium deserunt necessitatibus facere?';
         
         const wordAry = words.split(' ');
         
@@ -62,6 +56,28 @@
             document.getElementById('userValue').value ='';
 
         });
+        
+        //input[name="userValue"]
+        document.querySelector('input[name="userValue"]').addEventListener("keyup",function(e){
+			console.log(e);
+			if(e.keyCode == 13){
+				let userInput = document.getElementById('userValue').value;
+				let span = document.createElement('span');
+            	span.innerText = userInput;
+            	show.appendChild(span);
+				document.querySelector('input[name="userValue"]').value = '';
+			}
+		})
+		});
     </script>
+</head>
+<body>
+	<input type="text" name="userValue" id="userValue">
+    <button id="delBnt">삭제</button>
+    <!-- span 태그 안에 단어가 추가 되도록-->
+    <div id="show">
+        
+    </div>
+    
 </body>
 </html>

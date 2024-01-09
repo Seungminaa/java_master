@@ -11,7 +11,7 @@
       const xhtp = new XMLHttpRequest();
       xhtp.open('get','replyCountJson.do');
       xhtp.send();
-      xhtp.onload = function(){
+      xhtp.onload = function(){ //onload 중에 데이터를 요청해서 데이터를 사용해야함(비동기 방식 : 쓰레드가 병렬으로 처리되어서 다른곳에서 데이터가 사용안됨)
         let result = JSON.parse(xhtp.responseText);
         result.forEach(item => {
           chartData.push([item.name, item.cnt]);
