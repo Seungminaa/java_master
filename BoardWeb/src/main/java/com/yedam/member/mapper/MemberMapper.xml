@@ -13,4 +13,10 @@
   <select id="selectDanMember" resultType="member">
     select * from member where id=#{mno}
   </select>
+  <insert id="insertMember" parameterType="member">
+  	insert into member values (#{id},#{pw},#{name},#{responsibility},#{image})
+  </insert>
+  <delete id="deleteMember" parameterType="String">
+  	delete from member where id = #{id}
+  </delete>
 </mapper>

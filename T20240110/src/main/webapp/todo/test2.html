@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>test2</title>
+</head>
+
+<body>
+	<!--문제2 -->
+	<!-- 2024년 1월 달력을 출력하세요. cal.show() 메소드를 호출. -->
+	<script>
+		let body = document.querySelector('body');
+		let thd = document.createElement('theader');
+		thd.setAttribute('id','theader');
+		body.appendChild(thd);
+		let tbd = document.createElement('tbody');
+		tbd.setAttribute('id','tbody');
+		body.appendChild(tbd);
+
+		
+		const cal = {
+			show: function () {
+				let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
+				
+				makeCalendar(1); //1월
+				//달력생성
+				function makeCalendar(month) {
+					
+					makeTitle(days, document.getElementById('theader'));
+					makeBody(month, document.getElementById('tbody'));
+				}
+				
+				
+				function getLastDate(month) {
+					//월 입력 => 마지막날을 반환
+					return new Date(2024, month, 0).getDate();
+				}
+				
+				function getFirstDay(month) {
+					//월입력 => 1일의 위치(공백이 몇개 반환)
+					return new Date(2024, month-1, 1).getDay();
+				}
+				
+				function makeTitle(dayAry = [], pos = {}) {
+					let tr = document.createElement('tr');
+					dayAry.forEach(function (field) {
+						let th = document.createElement('th');
+						th.innerText = field;
+						tr.appendChild(th);
+					})
+					pos.appendChild(tr);
+				}
+				
+				//날짜 생성
+				function makeBody(month = 1, pos = {}) {
+					let tr = document.createElement('tr');
+					//공백
+					let firstDay = getFirstDay(month);
+					for (let i = 0; i < firstDay; i++) {
+						let td = document.createElement('td');
+						td.innerText = "";
+						tr.appendChild(td);
+					}
+					//날짜
+					let lastDate = getLastDate(month);
+					for (let i = 1; i <= lastDate; i++) {
+						let td = document.createElement('td');
+						td.innerText = i;
+						tr.appendChild(td);
+						
+						if ((firstDay + i) % 7 == 0) {
+							pos.appendChild(tr);
+							tr = document.createElement('tr');
+						}
+					}
+					pos.appendChild(tr);
+				}
+			}
+		}
+		
+		cal.show();
+		</script>
+	
+</body>
+
+</html>

@@ -35,8 +35,10 @@
 			$('thead input[type="checkbox"]').on('change',function(){
 				if($('thead input').is(':checked')){
 					$('tbody input[type="checkbox"]').prop("checked",true);
+					//$('tbody input[type="checkbox"]').attr("checked",'checked');
 				}else{
 					$('tbody input').prop("checked",false);
+					//$('tbody input').attr("checked",null);
 				}
 			})
 			

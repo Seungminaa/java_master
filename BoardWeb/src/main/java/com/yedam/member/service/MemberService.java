@@ -8,5 +8,7 @@ public interface MemberService {
 	public MemberVO login(String id,String pw);
 	public List<MemberVO> memberList();
 	public MemberVO getMember(int mno); 
+	public boolean addMember(MemberVO vo); 
+	public boolean removeMember(String id); 
 }
 

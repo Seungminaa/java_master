@@ -23,7 +23,11 @@ import com.yedam.member.command.GetMemberControl;
 import com.yedam.member.command.LoginControl;
 import com.yedam.member.command.LoginFormControl;
 import com.yedam.member.command.LogoutControl;
+import com.yedam.member.command.MemberAddJson;
+import com.yedam.member.command.MemberDelJson;
+import com.yedam.member.command.MemberListAjax;
 import com.yedam.member.command.MemberListControl;
+import com.yedam.member.command.MemberListJson;
 import com.yedam.reply.command.AddReplyJson;
 import com.yedam.reply.command.ChartForm;
 import com.yedam.reply.command.Covid19Form;
@@ -68,6 +72,13 @@ public class FrontController extends HttpServlet{
 		//관리자
 		map.put("/memberList.do", new MemberListControl());
 		map.put("/getMember.do", new GetMemberControl());
+		map.put("/memberListAjax.do", new MemberListAjax());
+		
+		//회원관련데이터(json) 처리
+		map.put("/memberListJson.do", new MemberListJson());
+		map.put("/memberAddJson.do", new MemberAddJson());
+		map.put("/memberDelJson.do", new MemberDelJson());
+		
 		
 		//tiles관련
 		map.put("/studentList.do", new studentListCont());

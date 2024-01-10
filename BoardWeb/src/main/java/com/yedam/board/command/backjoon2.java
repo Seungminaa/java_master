@@ -4,40 +4,46 @@ import java.io.*;
 import java.util.*;
 
 public class backjoon2 {
-	static int[][] q = new int[30][30];
+	static ArrayList<Integer> list;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-
-        int a = Integer.parseInt(br.readLine());
         StringTokenizer st = null;
-        for(int i=0;i<a;i++){
-            st = new StringTokenizer(br.readLine());
-            int b = Integer.parseInt(st.nextToken());
-            int c = Integer.parseInt(st.nextToken());
-            int d = 0;
-            int[] e = new int[2];
-            if(c>b){
-                e[0] = c; //큰수
-                e[1] = b; //작은수
-            }else if(c<b){
-                e[0] = b;
-                e[1] = c;
-            }
-            d = get(e[0],e[1]);
-            
-            sb.append(d+"\n");
+        list = new ArrayList<Integer>();
+        
+        st = new StringTokenizer(br.readLine());
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        
+        
+        st = new StringTokenizer(br.readLine());
+        for(int i=0;i<a;i++) {
+        	list.add(Integer.parseInt(st.nextToken()));
         }
-        System.out.println(sb);
-    }
-    static int get(int e0,int e1){ //증가량
-            if(q[e0][e1] > 0){
-                return q[e0][e1];
-            }
-            if(e0 == e1 || e1==0){
-                return q[e0][e1] = 1;
-            }
+        Collections.sort(list);
+        //c: 작은값, d:큰값, e:중간값
+        
+        
+            sb.append("\n");
+            System.out.println(sb);
+        }
+    static int get(int key,int low,int high){ 
+    	int mid;
 
-        return q[e0][e1] = get(e0-1,e1-1) + get(e0-1,e1);
+    	if(low <= high) {
+    		mid = (low + high) / 2;
+
+    		if(key == list.get(mid)) { // 탐색 성공 
+    			return mid;
+    		} else if(key < list.get(mid)) {
+    			// 왼쪽 부분 arr[0]부터 arr[mid-1]에서의 탐색 
+    			return get(key ,low, mid-1);  
+    		} else {
+    			// 오른쪽 부분 - arr[mid+1]부터 arr[high]에서의 탐색 
+    			return get(key, mid+1, high); 
+    		}
+    	}
+
+    	return -1; // 탐색 실패 
     }
 }
